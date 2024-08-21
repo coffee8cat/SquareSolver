@@ -17,7 +17,7 @@ void clean_input_buff()
 
 void reading_coeffs(struct coeffs * coeff_p)
 {
-    if(read_choice())
+    if(read_choice() == 1)
     {
         file_input(coeff_p);
     }
@@ -33,20 +33,24 @@ int read_choice()
             "FILE:  1\n"
             "stdin: 0\n");
 
-    int type_choice = 0;
+
+    int is_file_input = 0;
 
     while (true)
     {
-        if (scanf("%d", &type_choice) == 1 && (type_choice == 1 || type_choice == 0))
+        if (scanf("%d", &is_file_input) != 1)
+        {
+            printf("Allowed input are 0 and 1\n");
+        }
+        else
         {
             break;
         }
-        printf("Allowed input are 0 and 1\n");
 
         clean_input_buff();
     }
 
-    return type_choice;
+    return is_file_input;
 }
 
 void file_input(struct coeffs * coeff_p)
@@ -156,9 +160,9 @@ int start_unit_testing()
 
     for(int n_test = 0; n_test < n_tests; n_test++)
     {
-        int test_result = run_test(n_test, test_coeffs[n_test], test_exp[n_test], &test_out[n_test]);
+        unit_test_res test_result = run_test(n_test, test_coeffs[n_test], test_exp[n_test], &test_out[n_test]);
 
-        if(test_result == 1)
+        if(test_result == SUCCEED)
         {
             printf("Unit test %d: SUCCESS\n", n_test+1);
         }
@@ -171,15 +175,10 @@ int start_unit_testing()
     return n_tests;
 }
 
-int run_test(int n_test, struct coeffs test_coeffs, struct unit_test_exp test_exp,
-                struct unit_test_out * test_out)
+void dump_unit_test_results(int n_test, struct coeffs test_coeffs, struct unit_test_exp test_exp,
+                struct unit_test_out test_out)
 {
-    test_out -> n_roots = solver(test_coeffs, &test_out -> x1, &test_out -> x2);
-
-    if(test_out -> n_roots != test_exp.n_roots || !are_equal(test_out -> x1, test_exp.x1)
-        || !are_equal(test_out -> x2, test_exp.x2))
-    {
-        printf("--------------------------------------------------\n"
+    printf("--------------------------------------------------\n"
                "RUN_TEST ERROR: test %d failed\n"
                "Input: a = %f, b = %f, c = %f\n \n"
                "Expected Output: x1 = %f; x2 = %f; n_roots = %d;\n"
@@ -188,13 +187,23 @@ int run_test(int n_test, struct coeffs test_coeffs, struct unit_test_exp test_ex
                n_test,
                test_coeffs.a,   test_coeffs.b,   test_coeffs.c,
                test_exp.x1,     test_exp.x2,     test_exp.n_roots,
-               test_out -> x1,     test_out -> x2,     test_out -> n_roots);
+               test_out.x1,     test_out.x2,     test_out.n_roots);
+}
 
-        return 0;
+unit_test_res run_test(int n_test, struct coeffs test_coeffs, struct unit_test_exp test_exp,
+                struct unit_test_out * test_out)
+{
+    test_out -> n_roots = solver(test_coeffs, &test_out -> x1, &test_out -> x2);
+
+    if(test_out -> n_roots != test_exp.n_roots || !are_equal(test_out -> x1, test_exp.x1)
+        || !are_equal(test_out -> x2, test_exp.x2))
+    {
+        dump_unit_test_results(n_test, test_coeffs, test_exp, *test_out);
+        return FAILED;
     }
     else
     {
-        return 1;
+        return SUCCEED;
     }
 }
 
