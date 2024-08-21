@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
+#include <string.h>
 
 bool are_equal(double x, double y)
 {
@@ -14,29 +15,61 @@ void clean_input_buff()
     while (getchar() != '\n')
         continue;
 }
-void choose_mode(int argc, char * argv[], coeffs coeff_p)
+void choose_mode(int argc, char * argv[], coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots)
 {
     switch(argc)
     {
-        case 1:  std_mode_welcome();
-                 std_input(&coeff_p);
-                 break;
+        case 1:     std_mode_about();
+                    std_input(&coeff_p);
+                    break;
 
-        case 2:  printf("not yet");
-                 break;
+        case 2:     if(strncmp(argv[1], "-h", sizeof("-h")-1) == 0)
+                    {
+                        help();
+                    }
+                    if(strncmp(argv[1], "-u", sizeof("-u")-1) == 0)
+                    {
+                        start_unit_testing();
+                    }
+                    if(strncmp(argv[1], "-s", sizeof("-s")-1) == 0)
+                    {
+                        std_input(&coeff_p);
+                        n_roots = solver(coeff_p, x1, x2);
+                        output_solutions(*x1, *x2, n_roots);
+                    }
+                    if(strncmp(argv[1], "-f", sizeof("-u")-1) == 0)
+                    {
+                        file_input(&coeff_p);
+                        n_roots = solver(coeff_p, x1, x2);
+                        output_solutions(*x1, *x2, n_roots);
+                    }
+                    break;
 
-        default: printf("FLAG_READ_ERROR: too many arguments\n");
-                 break;
+        default:    printf("FLAG_READ_ERROR: too many arguments\n");
+                    break;
     }
 }
 
-void std_mode_welcome()
+void help()
+{
+    printf("Use flags below after a.exe:\n"
+           " -f reading coeffs from FILE\n"
+           " -s reading coeffs from STDIN\n"
+           " -u start solver unit testing\n"
+           " -h ask for help about programm\n");
+}
+
+void welcome()
 {
     printf("# Square Solver\n"
            "# Ded Course 2024\n"
-           "-----------------------\n"
-           "# use a.exe -h for help\n"
-           "std input by default\n");
+           "-------------------------------------\n\n");
+}
+
+void std_mode_about()
+{
+    printf("# use a.exe -h for help\n"
+           "# std input by default\n");
 }
 
 void reading_coeffs(struct coeffs * coeff_p)
@@ -170,13 +203,13 @@ int start_unit_testing()
         {0, 8, 9}
     };
 
-    unit_test_exp test_exp[n_tests] = {
+    unit_test test_exp[n_tests] = {
         {-1,     0, ONE_ROOT},
         {0,      0, INF_ROOTS},
         {-1.125, 0, ONE_ROOT},
     };
 
-    unit_test_out test_out[n_tests] = {
+    unit_test test_out[n_tests] = {
         {0, 0, NO_ROOTS},
         {0, 0, NO_ROOTS},
         {0, 0, NO_ROOTS}
@@ -199,8 +232,8 @@ int start_unit_testing()
     return n_tests;
 }
 
-void dump_unit_test_results(int n_test, struct coeffs test_coeffs, struct unit_test_exp test_exp,
-                struct unit_test_out test_out)
+void dump_unit_test_results(int n_test, struct coeffs test_coeffs, struct unit_test test_exp,
+                struct unit_test test_out)
 {
     printf("--------------------------------------------------\n"
                "RUN_TEST ERROR: test %d failed\n"
@@ -214,8 +247,8 @@ void dump_unit_test_results(int n_test, struct coeffs test_coeffs, struct unit_t
                test_out.x1,     test_out.x2,     test_out.n_roots);
 }
 
-unit_test_res run_test(int n_test, struct coeffs test_coeffs, struct unit_test_exp test_exp,
-                struct unit_test_out * test_out)
+unit_test_res run_test(int n_test, struct coeffs test_coeffs, struct unit_test test_exp,
+                struct unit_test * test_out)
 {
     test_out -> n_roots = solver(test_coeffs, &test_out -> x1, &test_out -> x2);
 
