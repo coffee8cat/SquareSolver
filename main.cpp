@@ -3,6 +3,9 @@
 
 int main(int argc, char * argv[])
 {
+
+    errno = 0;
+
     coeffs sq_coeffs = {0, 0, 0};
 
     double x1 = 0, x2 = 0;

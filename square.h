@@ -1,17 +1,15 @@
 #ifndef SQUARE_SOLVER_H__
 #define SQUARE_SOLVER_H__
 
-struct coeffs{double a; double b; double c;};
+struct coeffs {double a; double b; double c;};
 
 enum solver_outcome {NO_ROOTS, ONE_ROOT, TWO_ROOTS, INF_ROOTS};
 
-enum unit_test_res{SUCCEED, FAILED};
+enum unit_test_res {SUCCEED, FAILED};
 
-struct unit_test{double x1; double x2; solver_outcome n_roots;};
+struct unit_test {struct coeffs coeffs_t; double x1; double x2; solver_outcome n_roots;};
 
 const double ACCURACY = 0.000001;
-
-void show_errno();
 
 bool are_equal(double x, double y);
 
@@ -43,12 +41,11 @@ void std_input(struct coeffs * coeffs_p);
 
 int start_unit_testing();
 
+void dump_unit_test_results(int n_test, struct unit_test test_params,
+                            double x1, double x2, solver_outcome test_n_roots);
 
-void dump_unit_test_results(int n_test, struct coeffs test_coeffs, struct unit_test test_exp,
-                struct unit_test test_out);
-
-unit_test_res run_test(int n_test, struct coeffs test_coeffs, struct unit_test test_exp,
-                struct unit_test * test_out);
+unit_test_res run_test(int n_test, struct unit_test test_params,
+                            double x1, double x2, solver_outcome test_n_roots);
 
 /**--------------------------------------------------
  * @brief choose solver for ax^2 + bx + c = 0

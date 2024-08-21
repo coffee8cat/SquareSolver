@@ -8,32 +8,6 @@
 #include <assert.h>
 #include <errno.h>
 
-void show_errno()
-{
-    const char *err_info = "unknown error";
-
-    switch (errno)
-    {
-    case EDOM:   err_info = "domain error";
-                 break;
-
-    case EILSEQ: err_info = "illegal sequence";
-                 break;
-
-    case ERANGE: err_info = "pole or range error";
-                 break;
-    case EINVAL: err_info = "closing file error";
-
-    case 0:      err_info = "no error";
-                 break;
-
-    default:     break;
-    }
-
-    fputs(err_info, stdout);
-    puts(" occurred\n");
-}
-
 bool are_equal(double x, double y)
 {
     return fabs(x - y) < ACCURACY;
@@ -47,13 +21,23 @@ void clean_input_buff()
 
 void choose_mode(int argc, char * argv[], coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots)
 {
-    switch(argc)
+    if(argc > 1)
     {
-        case 1:     std_mode_about();
-                    std_input(&coeff_p);
-                    break;
+        printf("not_yet");
+    }
+    else
+    {
+        start_unit_testing();
 
-        case 2:     if(strncmp(argv[1], "-h", sizeof("-h")-1) == 0)
+        std_mode_about();
+
+        std_input(&coeff_p);
+
+        n_roots = solver(coeff_p, x1, x2);
+
+        output_solutions(*x1, *x2, n_roots);
+    }
+/*                    if(strncmp(argv[1], "-h", sizeof("-h")-1) == 0)
                     {
                         help();
                     }
@@ -86,12 +70,7 @@ void choose_mode(int argc, char * argv[], coeffs coeff_p, double * x1, double * 
                             }
                         }
                     }
-                    break;
-
-        default:    show_errno();
-                    printf("FLAG_READ_ERROR: invalid number of arguments\n");
-                    break;
-    }
+                    */
 }
 
 void help()
@@ -116,44 +95,6 @@ void std_mode_about()
            "# std input by default\n");
 }
 
-/*void reading_coeffs(struct coeffs * coeff_p)
-{
-    if(read_choice() == 1)
-    {
-        file_input(coeff_p);
-    }
-    else
-    {
-        std_input(coeff_p);
-    }
-}
-
-int read_choice()
-{
-    printf("Choose input type:\n"
-            "FILE:  1\n"
-            "stdin: 0\n");
-
-
-    int is_file_input = 0;
-
-    while (true)
-    {
-        if (scanf("%d", &is_file_input) != 1)
-        {
-            printf("Allowed input are 0 and 1\n");
-        }
-        else
-        {
-            break;
-        }
-
-        clean_input_buff();
-    }
-
-    return is_file_input;
-}*/
-
 void file_input(struct coeffs * coeff_p)
 {
     bool file_name_error = true;
@@ -176,9 +117,8 @@ void file_input(struct coeffs * coeff_p)
             fp = fopen(file_name, "r");
             if ( !fp )
             {
-                show_errno();
-                printf("FILE_OPEN ERROR: No such file\n");
-                printf("Write a name of file for input\n");
+                perror("fopen: ");
+                printf("\nWrite a name of file for input\n");
             }
             else
             {
@@ -189,7 +129,6 @@ void file_input(struct coeffs * coeff_p)
 
     while(fscanf(fp, "%lg %lg %lg", &coeff_p->a, &coeff_p->b, &coeff_p->c) != 3)
     {
-        show_errno();
         clean_input_buff();
         fprintf(stderr, "ERROR: Only decimal coefficients allowed\n"
                         "Example: -4.6, 64, 0.7\n");
@@ -197,7 +136,7 @@ void file_input(struct coeffs * coeff_p)
 
     if(fclose(fp) == EOF)
     {
-        show_errno();
+        printf("CLOSING_FILE_ERROR: cannot close file %s", file_name);
     }
 }
 
@@ -210,77 +149,6 @@ void std_input(struct coeffs * coeff_p)
         clean_input_buff();
         fprintf(stderr, "ERROR: Only decimal coefficients allowed\n"
                         "Example: -4.6, 64, 0.7\n");
-    }
-}
-
-int start_unit_testing()
-{
-    const int n_tests = 3;
-
-    coeffs test_coeffs[n_tests] = {
-        {1, 2, 1},
-        {0, 0, 0},
-        {0, 8, 9}
-    };
-
-    unit_test test_exp[n_tests] = {
-        {-1,     0, ONE_ROOT},
-        {0,      0, INF_ROOTS},
-        {-1.125, 0, ONE_ROOT},
-    };
-
-    unit_test test_out[n_tests] = {
-        {0, 0, NO_ROOTS},
-        {0, 0, NO_ROOTS},
-        {0, 0, NO_ROOTS}
-    };
-
-    for(int n_test = 0; n_test < n_tests; n_test++)
-    {
-        unit_test_res test_result = run_test(n_test, test_coeffs[n_test], test_exp[n_test], &test_out[n_test]);
-
-        if(test_result == SUCCEED)
-        {
-            printf("Unit test %d: SUCCESS\n", n_test+1);
-        }
-        else
-        {
-            printf("Unit test %d failed\n", n_test+1);
-        }
-    }
-
-    return n_tests;
-}
-
-void dump_unit_test_results(int n_test, struct coeffs test_coeffs, struct unit_test test_exp,
-                struct unit_test test_out)
-{
-    printf("--------------------------------------------------\n"
-               "RUN_TEST ERROR: test %d failed\n"
-               "Input: a = %f, b = %f, c = %f\n \n"
-               "Expected Output: x1 = %f; x2 = %f; n_roots = %d;\n"
-               "Solver Output:   x1 = %f; x2 = %f; n_roots = %d;\n"
-               "--------------------------------------------------\n",
-               n_test,
-               test_coeffs.a,   test_coeffs.b,   test_coeffs.c,
-               test_exp.x1,     test_exp.x2,     test_exp.n_roots,
-               test_out.x1,     test_out.x2,     test_out.n_roots);
-}
-
-unit_test_res run_test(int n_test, struct coeffs test_coeffs, struct unit_test test_exp,
-                struct unit_test * test_out)
-{
-    test_out -> n_roots = solver(test_coeffs, &test_out -> x1, &test_out -> x2);
-
-    if(test_out -> n_roots != test_exp.n_roots || !are_equal(test_out -> x1, test_exp.x1)
-        || !are_equal(test_out -> x2, test_exp.x2))
-    {
-        dump_unit_test_results(n_test, test_coeffs, test_exp, *test_out);
-        return FAILED;
-    }
-    else
-    {
-        return SUCCEED;
     }
 }
 
