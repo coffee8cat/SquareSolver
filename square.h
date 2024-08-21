@@ -15,6 +15,8 @@ bool are_equal(double x, double y);
 
 void clean_input_buff();
 
+void execute_flags(int argc, char * argv[], coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots);
+
 void choose_mode(int argc, char * argv[], coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots);
 
 void help();

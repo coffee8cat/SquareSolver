@@ -23,7 +23,7 @@ void choose_mode(int argc, char * argv[], coeffs coeff_p, double * x1, double * 
 {
     if(argc > 1)
     {
-        printf("not_yet");
+        execute_flags(argc, argv, coeff_p, x1, x2, n_roots);
     }
     else
     {
@@ -37,40 +37,41 @@ void choose_mode(int argc, char * argv[], coeffs coeff_p, double * x1, double * 
 
         output_solutions(*x1, *x2, n_roots);
     }
-/*                    if(strncmp(argv[1], "-h", sizeof("-h")-1) == 0)
-                    {
-                        help();
-                    }
-                    else
-                    {
-                        if(strncmp(argv[1], "-u", sizeof("-u")-1) == 0)
-                        {
-                            start_unit_testing();
-                        }
-                        else
-                        {
-                            if(strncmp(argv[1], "-s", sizeof("-s")-1) == 0)
-                            {
-                                std_input(&coeff_p);
-                                n_roots = solver(coeff_p, x1, x2);
-                                output_solutions(*x1, *x2, n_roots);
-                            }
-                            else
-                            {
-                                if(strncmp(argv[1], "-f", sizeof("-u")-1) == 0)
-                                {
-                                    file_input(&coeff_p);
-                                    n_roots = solver(coeff_p, x1, x2);
-                                    output_solutions(*x1, *x2, n_roots);
-                                }
-                                else
-                                {
-                                    printf("FLAG_READ_ERROR: No such flag");
-                                }
-                            }
-                        }
-                    }
-                    */
+}
+
+void execute_flags(int argc, char * argv[], coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots)
+{
+    for(int n_flag = 1; n_flag < argc; n_flag++)
+    {
+        if(argv[n_flag][0] == '-')
+        {
+            switch(argv[n_flag][1])
+            {
+                case 'h': help();
+                          break;
+
+                case 'u': start_unit_testing();
+                          break;
+
+                case 's': std_input(&coeff_p);
+                          n_roots = solver(coeff_p, x1, x2);
+                          output_solutions(*x1, *x2, n_roots);
+                          break;
+
+                case 'f': file_input(&coeff_p);
+                          n_roots = solver(coeff_p, x1, x2);
+                          output_solutions(*x1, *x2, n_roots);
+                          break;
+
+                default:  printf("flag error: No such flag\n");
+                          break;
+            }
+        }
+        else
+        {
+            printf("flag read error: incorrect input in position %d\n", n_flag + 1);
+        }
+    }
 }
 
 void help()
