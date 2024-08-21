@@ -5,10 +5,8 @@ struct coeffs{double a; double b; double c;};
 
 enum solver_outcome {NO_ROOTS, ONE_ROOT, TWO_ROOTS, INF_ROOTS};
 
-
-struct test_input{struct coeffs test_coeffs;
-                  double x1_exp; double x2_exp; solver_outcome n_roots_exp;
-                  double x1;     double x2;     solver_outcome n_roots;};
+struct unit_test_exp{double x1; double x2; solver_outcome n_roots;};
+struct unit_test_out{double x1; double x2; solver_outcome n_roots;};
 
 const double ACCURACY = 0.000001;
 
@@ -41,8 +39,8 @@ void std_input(struct coeffs * coeffs_p);
 
 int start_unit_testing();
 
-int run_test(int n_test, test_input * test);
-
+int run_test(int n_test, struct coeffs test_coeffs, struct unit_test_exp test_exp,
+                struct unit_test_out * test_out);
 /**--------------------------------------------------
  * @brief choose solver for ax^2 + bx + c = 0
  *

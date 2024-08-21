@@ -136,46 +136,48 @@ int start_unit_testing()
 {
     const int n_tests = 3;
 
-
-
-    test_input test[n_tests] = {
-        {{1, 2, 1},
-        -1, 0, ONE_ROOT,
-        0, 0, NO_ROOTS},
-
-        {{0, 0, 0},
-        0, 0, INF_ROOTS,
-        0, 0, NO_ROOTS},
-
-        {{0, 8, 9},
-        -1.125, 0, ONE_ROOT,
-        0, 0, NO_ROOTS}
+    coeffs test_coeffs[n_tests] = {
+        {1, 2, 1},
+        {0, 0, 0},
+        {0, 8, 9}
     };
 
+    unit_test_exp test_exp[n_tests] = {
+        {-1,     0, ONE_ROOT},
+        {0,      0, INF_ROOTS},
+        {-1.125, 0, ONE_ROOT},
+    };
 
-    for(int n_test = 1; n_test < n_tests + 1; n_test++)
+    unit_test_out test_out[n_tests] = {
+        {0, 0, NO_ROOTS},
+        {0, 0, NO_ROOTS},
+        {0, 0, NO_ROOTS}
+    };
+
+    for(int n_test = 0; n_test < n_tests; n_test++)
     {
-        int test_result = run_test(n_test, &test[n_test - 1]);
+        int test_result = run_test(n_test, test_coeffs[n_test], test_exp[n_test], &test_out[n_test]);
 
         if(test_result == 1)
         {
-            printf("Unit test %d: SUCCESS\n", n_test);
+            printf("Unit test %d: SUCCESS\n", n_test+1);
         }
         else
         {
-            printf("Unit test %d failed\n", n_test);
+            printf("Unit test %d failed\n", n_test+1);
         }
     }
 
     return n_tests;
 }
 
-int run_test(int n_test, test_input * test)
+int run_test(int n_test, struct coeffs test_coeffs, struct unit_test_exp test_exp,
+                struct unit_test_out * test_out)
 {
-    test -> n_roots = solver(test->test_coeffs, &test->x1, &test->x2);
+    test_out -> n_roots = solver(test_coeffs, &test_out -> x1, &test_out -> x2);
 
-    if(test-> n_roots != test-> n_roots_exp || !are_equal(test->x1, test-> x1_exp)
-        || !are_equal(test-> x2, test-> x2_exp))
+    if(test_out -> n_roots != test_exp.n_roots || !are_equal(test_out -> x1, test_exp.x1)
+        || !are_equal(test_out -> x2, test_exp.x2))
     {
         printf("--------------------------------------------------\n"
                "RUN_TEST ERROR: test %d failed\n"
@@ -184,9 +186,9 @@ int run_test(int n_test, test_input * test)
                "Solver Output:   x1 = %f; x2 = %f; n_roots = %d;\n"
                "--------------------------------------------------\n",
                n_test,
-               test-> test_coeffs.a,      test-> test_coeffs.b,      test-> test_coeffs.c,
-               test-> x1_exp,             test-> x2_exp,             test-> n_roots_exp,
-               test-> x1,                 test-> x2,                 test-> n_roots);
+               test_coeffs.a,   test_coeffs.b,   test_coeffs.c,
+               test_exp.x1,     test_exp.x2,     test_exp.n_roots,
+               test_out -> x1,     test_out -> x2,     test_out -> n_roots);
 
         return 0;
     }
