@@ -11,13 +11,8 @@ struct unit_test{double x1; double x2; solver_outcome n_roots;};
 
 const double ACCURACY = 0.000001;
 
-/**--------------------------------------------------
- * @brief check double x==0
- *
- * @param x : variable to check
- *
- * @return true if x==0 else false
-*/
+void show_errno();
+
 bool are_equal(double x, double y);
 
 void clean_input_buff();

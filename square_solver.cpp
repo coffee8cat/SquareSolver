@@ -1,9 +1,38 @@
 #include "square.h"
 
 #include <stdio.h>
-#include <math.h>
-#include <assert.h>
 #include <string.h>
+
+#include <math.h>
+
+#include <assert.h>
+#include <errno.h>
+
+void show_errno()
+{
+    const char *err_info = "unknown error";
+
+    switch (errno)
+    {
+    case EDOM:   err_info = "domain error";
+                 break;
+
+    case EILSEQ: err_info = "illegal sequence";
+                 break;
+
+    case ERANGE: err_info = "pole or range error";
+                 break;
+    case EINVAL: err_info = "closing file error";
+
+    case 0:      err_info = "no error";
+                 break;
+
+    default:     break;
+    }
+
+    fputs(err_info, stdout);
+    puts(" occurred\n");
+}
 
 bool are_equal(double x, double y)
 {
@@ -15,6 +44,7 @@ void clean_input_buff()
     while (getchar() != '\n')
         continue;
 }
+
 void choose_mode(int argc, char * argv[], coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots)
 {
     switch(argc)
@@ -27,25 +57,39 @@ void choose_mode(int argc, char * argv[], coeffs coeff_p, double * x1, double * 
                     {
                         help();
                     }
-                    if(strncmp(argv[1], "-u", sizeof("-u")-1) == 0)
+                    else
                     {
-                        start_unit_testing();
-                    }
-                    if(strncmp(argv[1], "-s", sizeof("-s")-1) == 0)
-                    {
-                        std_input(&coeff_p);
-                        n_roots = solver(coeff_p, x1, x2);
-                        output_solutions(*x1, *x2, n_roots);
-                    }
-                    if(strncmp(argv[1], "-f", sizeof("-u")-1) == 0)
-                    {
-                        file_input(&coeff_p);
-                        n_roots = solver(coeff_p, x1, x2);
-                        output_solutions(*x1, *x2, n_roots);
+                        if(strncmp(argv[1], "-u", sizeof("-u")-1) == 0)
+                        {
+                            start_unit_testing();
+                        }
+                        else
+                        {
+                            if(strncmp(argv[1], "-s", sizeof("-s")-1) == 0)
+                            {
+                                std_input(&coeff_p);
+                                n_roots = solver(coeff_p, x1, x2);
+                                output_solutions(*x1, *x2, n_roots);
+                            }
+                            else
+                            {
+                                if(strncmp(argv[1], "-f", sizeof("-u")-1) == 0)
+                                {
+                                    file_input(&coeff_p);
+                                    n_roots = solver(coeff_p, x1, x2);
+                                    output_solutions(*x1, *x2, n_roots);
+                                }
+                                else
+                                {
+                                    printf("FLAG_READ_ERROR: No such flag");
+                                }
+                            }
+                        }
                     }
                     break;
 
-        default:    printf("FLAG_READ_ERROR: too many arguments\n");
+        default:    show_errno();
+                    printf("FLAG_READ_ERROR: invalid number of arguments\n");
                     break;
     }
 }
@@ -72,7 +116,7 @@ void std_mode_about()
            "# std input by default\n");
 }
 
-void reading_coeffs(struct coeffs * coeff_p)
+/*void reading_coeffs(struct coeffs * coeff_p)
 {
     if(read_choice() == 1)
     {
@@ -108,7 +152,7 @@ int read_choice()
     }
 
     return is_file_input;
-}
+}*/
 
 void file_input(struct coeffs * coeff_p)
 {
@@ -132,6 +176,7 @@ void file_input(struct coeffs * coeff_p)
             fp = fopen(file_name, "r");
             if ( !fp )
             {
+                show_errno();
                 printf("FILE_OPEN ERROR: No such file\n");
                 printf("Write a name of file for input\n");
             }
@@ -144,46 +189,17 @@ void file_input(struct coeffs * coeff_p)
 
     while(fscanf(fp, "%lg %lg %lg", &coeff_p->a, &coeff_p->b, &coeff_p->c) != 3)
     {
-        while(getchar() != '\n')
-            continue;
-
+        show_errno();
+        clean_input_buff();
         fprintf(stderr, "ERROR: Only decimal coefficients allowed\n"
                         "Example: -4.6, 64, 0.7\n");
     }
 
-    fclose(fp);
+    if(fclose(fp) == EOF)
+    {
+        show_errno();
+    }
 }
-//
-//    while(file_name_error == true)
-//    {
-//        printf("Write a name of file for input\n");
-
-//        while(scanf("%19s\n", file_name) != EOF)
-//        {
-//            printf("ERROR: Cannot read file name\n"
-//                   "Write a name of file for input\n");
-//
-//            fprintf( stderr, "[%s]\n", file_name);
-//
-//            while(getchar() != '\n')
-//                continue;
-//        }
-//        while(getchar() != '\n')
-//                continue;
-//        printf("scanf: %d\n", scanf("19%s", file_name));
-//        printf("[%s]\n", file_name);
-//        printf("Opening %s\n", file_name);
-//        fp = fopen(file_name, "r");
-//        if(fp == NULL)
-//        {
-//            fprintf(stderr, "FILE_INPUT ERROR: Cannot open file %s\n", file_name);
-//            while(getchar() != '\n')
-//                continue;
-//        }
-//        else
-//        {
-//            file_name_error = false;
-//        }
 
 void std_input(struct coeffs * coeff_p)
 {
@@ -191,9 +207,7 @@ void std_input(struct coeffs * coeff_p)
 
     while(scanf("%lg %lg %lg", &coeff_p->a, &coeff_p->b, &coeff_p->c) != 3)
     {
-        while(getchar() != '\n')
-            continue;
-
+        clean_input_buff();
         fprintf(stderr, "ERROR: Only decimal coefficients allowed\n"
                         "Example: -4.6, 64, 0.7\n");
     }
