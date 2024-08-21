@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1724172201 source:c:\users\agniy\ded\squaresolver\main.cpp
+	<TXLib.h>
+	"square.h"
+
+1724171329 c:\users\agniy\ded\squaresolver\square.h
+
+1724170244 source:c:\users\agniy\ded\squaresolver\square_solver.cpp
+	"square.h"
+	<stdio.h>
+	<math.h>
+	<assert.h>
+
