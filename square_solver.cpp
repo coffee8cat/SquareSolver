@@ -112,29 +112,35 @@ int read_choice()
 
 void file_input(struct coeffs * coeff_p)
 {
-    //bool file_name_error = true;
+    bool file_name_error = true;
+
+    printf("Write a name of file for input\n");
+
     char file_name[20] = {};
 
     FILE *fp = NULL;
-    if(scanf("%19s", file_name) != 1)
+    while(file_name_error)
     {
-        printf("FILE_READ ERROR\n");
-    }
-    else
-    {
-        printf("[%s]\n", file_name);
-
-        fp = fopen(file_name, "r");
-        if ( !fp )
+        if(scanf("%19s", file_name) != 1)
         {
-            printf("No such file\n");
+            printf("FILE_READ ERROR\n");
         }
- /*       else
+        else
         {
-            file_name_error = false;
-        }*/
-    }
+            printf("[%s]\n", file_name);
 
+            fp = fopen(file_name, "r");
+            if ( !fp )
+            {
+                printf("FILE_OPEN ERROR: No such file\n");
+                printf("Write a name of file for input\n");
+            }
+            else
+            {
+                file_name_error = false;
+            }
+        }
+    }
 
     while(fscanf(fp, "%lg %lg %lg", &coeff_p->a, &coeff_p->b, &coeff_p->c) != 3)
     {
