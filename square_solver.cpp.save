@@ -1,4 +1,5 @@
 #include "square.h"
+
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
@@ -139,23 +140,36 @@ void std_input(struct coeffs * coeff_p)
 
 int start_unit_testing()
 {
-    const int n_tests = 2;
-    test_input test[n_tests] = {
-        {1, 2, 1,
-        -1, 0, ONE_ROOT,
-         0, 0, NO_ROOTS},
+    const int n_tests = 3;
 
-        {0, 0, 0,
-         0, 0, INF_ROOTS,
-         0, 0, NO_ROOTS}
+
+
+    test_input test[n_tests] = {
+        {{1, 2, 1},
+        -1, 0, ONE_ROOT,
+        0, 0, NO_ROOTS},
+
+        {{0, 0, 0},
+        0, 0, INF_ROOTS,
+        0, 0, NO_ROOTS},
+
+        {{0, 8, 9},
+        -1.125, 0, ONE_ROOT,
+        0, 0, NO_ROOTS}
     };
+
 
     for(int n_test = 1; n_test < n_tests + 1; n_test++)
     {
         int test_result = run_test(n_test, &test[n_test - 1]);
+
         if(test_result == 1)
         {
-            printf("Unit test %d: SUCCESS", n_test);
+            printf("Unit test %d: SUCCESS\n", n_test);
+        }
+        else
+        {
+            printf("Unit test %d failed\n", n_test);
         }
     }
 
@@ -164,21 +178,21 @@ int start_unit_testing()
 
 int run_test(int n_test, test_input * test)
 {
-    coeffs test_coeffs = {test->a, test->b, test->c};
-
-    test -> n_roots = solver(test_coeffs, &test->x1, &test->x2);
+    test -> n_roots = solver(test->test_coeffs, &test->x1, &test->x2);
 
     if(test-> n_roots != test-> n_roots_exp || !are_equal(test->x1, test-> x1_exp)
         || !are_equal(test-> x2, test-> x2_exp))
     {
-        printf("RUN_TEST ERROR: test %d failed\n"
+        printf("--------------------------------------------------\n"
+               "RUN_TEST ERROR: test %d failed\n"
                "Input: a = %f, b = %f, c = %f\n \n"
                "Expected Output: x1 = %f; x2 = %f; n_roots = %d;\n"
-               "Solver Output:   x1 = %f; x2 = %f; n_roots = %d;\n",
+               "Solver Output:   x1 = %f; x2 = %f; n_roots = %d;\n"
+               "--------------------------------------------------\n",
                n_test,
-               test-> a,      test-> b,      test-> c,
-               test-> x1_exp, test-> x2_exp, test-> n_roots_exp,
-               test-> x1,     test-> x2,     test-> n_roots);
+               test-> test_coeffs.a,      test-> test_coeffs.b,      test-> test_coeffs.c,
+               test-> x1_exp,             test-> x2_exp,             test-> n_roots_exp,
+               test-> x1,                 test-> x2,                 test-> n_roots);
 
         return 0;
     }
@@ -238,6 +252,7 @@ solver_outcome square_equation(struct coeffs sq_coeffs, double * x1, double * x2
 
 solver_outcome linear_equation(struct coeffs sq_coeffs, double * x)
 {
+
     if(are_equal(sq_coeffs.b, 0.0))
     {
 

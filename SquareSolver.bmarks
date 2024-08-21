@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <BrowseTracker_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="square_solver.cpp" open="1" top="1" tabpos="3">
-		<Cursor position="1051" topLine="24" />
-		<BrowseMarks positions="5209,1932,1977,2231,2260,2320,2411,2718,2723,2764,2802,2879,3069,3226,3451,3802,3963,4713,4919,5018" />
-		<Book_Marks positions="731" />
-	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="184" topLine="0" />
-		<BrowseMarks positions="20,55,143,305" />
-		<Book_Marks positions="" />
+	<File name="square_solver.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="2231" topLine="73" />
+		<BrowseMarks positions="4470,4837,4856,4911,4990,5106,5222,5573,5741,6062,6067,6113,6514,6819,7010,3794,4014,4100,4150,4401" />
+		<Book_Marks positions="731,3515" />
 	</File>
 	<File name="SquareSolver.cbp" open="0" top="0" tabpos="0">
 		<Cursor position="1093" topLine="18" />
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="204" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
 	</File>
 </BrowseTracker_layout_file>

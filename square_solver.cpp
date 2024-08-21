@@ -51,10 +51,41 @@ int read_choice()
 
 void file_input(struct coeffs * coeff_p)
 {
-//    FILE * fp = NULL;
-//
-    bool file_name_error = true;
+    //bool file_name_error = true;
     char file_name[20] = {};
+
+    FILE *fp = NULL;
+    if(scanf("%19s", file_name) != 1)
+    {
+        printf("FILE_READ ERROR\n");
+    }
+    else
+    {
+        printf("[%s]\n", file_name);
+
+        fp = fopen(file_name, "r");
+        if ( !fp )
+        {
+            printf("No such file\n");
+        }
+ /*       else
+        {
+            file_name_error = false;
+        }*/
+    }
+
+
+    while(fscanf(fp, "%lg %lg %lg", &coeff_p->a, &coeff_p->b, &coeff_p->c) != 3)
+    {
+        while(getchar() != '\n')
+            continue;
+
+        fprintf(stderr, "ERROR: Only decimal coefficients allowed\n"
+                        "Example: -4.6, 64, 0.7\n");
+    }
+
+    fclose(fp);
+}
 //
 //    while(file_name_error == true)
 //    {
@@ -86,43 +117,6 @@ void file_input(struct coeffs * coeff_p)
 //        {
 //            file_name_error = false;
 //        }
-    FILE *fp = NULL;
-    while(file_name_error)
-    {
-        while(true)
-        {
-            if(scanf("%19s", file_name) != 1)
-            {
-                printf("FILE_READ ERROR\n");
-            }
-            else
-            {
-                printf("[%s]\n", file_name);
-
-                fp = fopen(file_name, "r");
-                if ( !fp )
-                {
-                    printf("No such file\n");
-                }
-                else
-                {
-                    file_name_error = false;
-                }
-            }
-        }
-    }
-
-    while(fscanf(fp, "%lg %lg %lg", &coeff_p->a, &coeff_p->b, &coeff_p->c) != 3)
-    {
-        while(getchar() != '\n')
-            continue;
-
-        fprintf(stderr, "ERROR: Only decimal coefficients allowed\n"
-                        "Example: -4.6, 64, 0.7\n");
-    }
-
-    fclose(fp);
-}
 
 void std_input(struct coeffs * coeff_p)
 {
@@ -141,6 +135,8 @@ void std_input(struct coeffs * coeff_p)
 int start_unit_testing()
 {
     const int n_tests = 3;
+
+
 
     test_input test[n_tests] = {
         {{1, 2, 1},
