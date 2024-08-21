@@ -23,6 +23,10 @@ bool are_equal(double x, double y);
 
 void clean_input_buff();
 
+void choose_mode(int argc, char * argv[], coeffs coeff_p);
+
+void std_mode_welcome();
+
 void reading_coeffs(struct coeffs * coeffs_p);
 
 int read_choice();

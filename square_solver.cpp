@@ -14,6 +14,30 @@ void clean_input_buff()
     while (getchar() != '\n')
         continue;
 }
+void choose_mode(int argc, char * argv[], coeffs coeff_p)
+{
+    switch(argc)
+    {
+        case 1:  std_mode_welcome();
+                 std_input(&coeff_p);
+                 break;
+
+        case 2:  printf("not yet");
+                 break;
+
+        default: printf("FLAG_READ_ERROR: too many arguments\n");
+                 break;
+    }
+}
+
+void std_mode_welcome()
+{
+    printf("# Square Solver\n"
+           "# Ded Course 2024\n"
+           "-----------------------\n"
+           "# use a.exe -h for help\n"
+           "std input by default\n");
+}
 
 void reading_coeffs(struct coeffs * coeff_p)
 {
