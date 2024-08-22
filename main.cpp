@@ -2,7 +2,7 @@
 #include "all_service.h"
 #include "menu.h"
 
-int main(int argc, char * argv[])
+int main(const int argc, const char * argv[])
 {
     errno = 0;
 

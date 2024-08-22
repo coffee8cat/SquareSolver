@@ -5,7 +5,7 @@
 #ifndef MENU_CHOOSING_MODE_H__
 #define MENU_CHOOSING_MODE_H__
 
-void choose_mode(int argc, char * argv[], coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots);
+void choose_mode(const int argc, const char * argv[], coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots);
 
 void help();
 

@@ -14,48 +14,73 @@ bool are_equal(double x, double y)
     return fabs(x - y) < ACCURACY;
 }
 
-void file_input(struct coeffs * coeff_p)
+void file_input(struct coeffs * coeff_p, read_type_name read_type, char file_name[])
 {
-    bool file_name_error = true;
-
-    printf("Write a name of file for input\n");
-
-    char file_name[20] = {};
-
     FILE *fp = NULL;
-    while(file_name_error)
-    {
-        if(scanf("%19s", file_name) != 1)
-        {
-            printf("FILE_READ ERROR\n");
-        }
-        else
-        {
-            printf("[%s]\n", file_name);
 
-            fp = fopen(file_name, "r");
-            if ( !fp )
+    if(read_type == with_flags)
+    {
+        if(!open_file(file_name, &fp))
+        {
+            bool read_status = false, open_status = false;
+            while(!read_status or !open_status)
             {
-                perror("fopen: ");
-                printf("\nWrite a name of file for input\n");
-            }
-            else
-            {
-                file_name_error = false;
+                printf("Write a name of file for input\n");
+                read_status = manual_read_file_name(file_name);
+                printf("[%s]\n", file_name);
+                open_status = open_file(file_name, &fp);
             }
         }
     }
+    else
+    {
+        bool read_status = false, open_status = false;
+        while(!read_status or !open_status)
+        {
+            printf("Write a name of file for input\n");
+            read_status = manual_read_file_name(file_name);
+            printf("[%s]\n", file_name);
+            open_status = open_file(file_name, &fp);
+        }
+    }
 
-    while(fscanf(fp, "%lg %lg %lg", &coeff_p->a, &coeff_p->b, &coeff_p->c) != 3)
+    while (fscanf(fp, "%lg %lg %lg", &coeff_p->a, &coeff_p->b, &coeff_p->c) != 3)
     {
         clean_input_buff();
         fprintf(stderr, "ERROR: Only decimal coefficients allowed\n"
                         "Example: -4.6, 64, 0.7\n");
     }
 
-    if(fclose(fp) == EOF)
+    if (fclose(fp) == EOF)
     {
         printf("CLOSING_FILE_ERROR: cannot close file %s", file_name);
+    }
+}
+
+bool manual_read_file_name(char file_name[])
+{
+    if(scanf("%19s", file_name) != 1)
+    {
+        printf("FILE_READ_ERROR\n");
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+bool open_file(char file_name[], FILE **fp)
+{
+    *fp = fopen(file_name, "r");
+    if ( !*fp )
+    {
+        perror("fopen: ");
+        return false;
+    }
+    else
+    {
+        return true;
     }
 }
 

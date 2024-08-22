@@ -5,9 +5,16 @@
 
 const double ACCURACY = 0.000001;
 
+enum read_type_name{manual, with_flags};
+
 bool are_equal(double x, double y);
 
-void file_input(struct coeffs * coeffs_p);
+void file_input(struct coeffs * coeff_p, read_type_name read_type, char file_name[]);
+
+bool manual_read_file_name(char file_name[]);
+
+bool open_file(char file_name[], FILE **fp);
+
 /**--------------------------------------------------
  * @brief read coefs for ax^2 + bx + c = 0
  *
