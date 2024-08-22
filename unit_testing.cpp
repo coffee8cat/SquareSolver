@@ -1,8 +1,10 @@
-#include "square.h"
-
 #include <stdio.h>
 
-int start_unit_testing()
+#include "all_service.h"
+#include "unit_testing.h"
+#include "square_solver.h"
+
+void start_unit_testing()
 {
     const int n_tests = 3;
 
@@ -28,8 +30,6 @@ int start_unit_testing()
             printf("Unit test %d failed\n", n_test+1);
         }
     }
-
-    return n_tests;
 }
 
 void dump_unit_test_results(int n_test, struct unit_test test_params,

@@ -1,9 +1,9 @@
 #include <TXLib.h>
-#include "square.h"
+#include "all_service.h"
+#include "menu.h"
 
 int main(int argc, char * argv[])
 {
-
     errno = 0;
 
     coeffs sq_coeffs = {0, 0, 0};
@@ -15,7 +15,4 @@ int main(int argc, char * argv[])
     welcome();
     choose_mode(argc, argv, sq_coeffs, &x1, &x2, n_roots);
 
-//    n_roots = solver(sq_coeffs, &x1, &x2);
-//
-//    output_solutions(x1, x2, n_roots);
 }

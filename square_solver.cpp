@@ -1,5 +1,3 @@
-#include "square.h"
-
 #include <stdio.h>
 #include <string.h>
 
@@ -8,92 +6,12 @@
 #include <assert.h>
 #include <errno.h>
 
+#include "square_solver.h"
+#include "all_service.h"
+
 bool are_equal(double x, double y)
 {
     return fabs(x - y) < ACCURACY;
-}
-
-void clean_input_buff()
-{
-    while (getchar() != '\n')
-        continue;
-}
-
-void choose_mode(int argc, char * argv[], coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots)
-{
-    if(argc > 1)
-    {
-        execute_flags(argc, argv, coeff_p, x1, x2, n_roots);
-    }
-    else
-    {
-        start_unit_testing();
-
-        std_mode_about();
-
-        std_input(&coeff_p);
-
-        n_roots = solver(coeff_p, x1, x2);
-
-        output_solutions(*x1, *x2, n_roots);
-    }
-}
-
-void execute_flags(int argc, char * argv[], coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots)
-{
-    for(int n_flag = 1; n_flag < argc; n_flag++)
-    {
-        if(argv[n_flag][0] == '-')
-        {
-            switch(argv[n_flag][1])
-            {
-                case 'h': help();
-                          break;
-
-                case 'u': start_unit_testing();
-                          break;
-
-                case 's': std_input(&coeff_p);
-                          n_roots = solver(coeff_p, x1, x2);
-                          output_solutions(*x1, *x2, n_roots);
-                          break;
-
-                case 'f': file_input(&coeff_p);
-                          n_roots = solver(coeff_p, x1, x2);
-                          output_solutions(*x1, *x2, n_roots);
-                          break;
-
-                default:  printf("flag error: No such flag\n");
-                          break;
-            }
-        }
-        else
-        {
-            printf("flag read error: incorrect input in position %d\n", n_flag + 1);
-        }
-    }
-}
-
-void help()
-{
-    printf("Use flags below after a.exe:\n"
-           " -f reading coeffs from FILE\n"
-           " -s reading coeffs from STDIN\n"
-           " -u start solver unit testing\n"
-           " -h ask for help about programm\n");
-}
-
-void welcome()
-{
-    printf("# Square Solver\n"
-           "# Ded Course 2024\n"
-           "-------------------------------------\n\n");
-}
-
-void std_mode_about()
-{
-    printf("# use a.exe -h for help\n"
-           "# std input by default\n");
 }
 
 void file_input(struct coeffs * coeff_p)

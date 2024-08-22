@@ -1,33 +1,11 @@
+#include "all_service.h"
+
 #ifndef SQUARE_SOLVER_H__
 #define SQUARE_SOLVER_H__
-
-struct coeffs {double a; double b; double c;};
-
-enum solver_outcome {NO_ROOTS, ONE_ROOT, TWO_ROOTS, INF_ROOTS};
-
-enum unit_test_res {SUCCEED, FAILED};
-
-struct unit_test {struct coeffs coeffs_t; double x1; double x2; solver_outcome n_roots;};
 
 const double ACCURACY = 0.000001;
 
 bool are_equal(double x, double y);
-
-void clean_input_buff();
-
-void execute_flags(int argc, char * argv[], coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots);
-
-void choose_mode(int argc, char * argv[], coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots);
-
-void help();
-
-void welcome();
-
-void std_mode_about();
-
-void reading_coeffs(struct coeffs * coeffs_p);
-
-int read_choice();
 
 void file_input(struct coeffs * coeffs_p);
 /**--------------------------------------------------
@@ -40,14 +18,6 @@ void file_input(struct coeffs * coeffs_p);
  * @return number of roots
 */
 void std_input(struct coeffs * coeffs_p);
-
-int start_unit_testing();
-
-void dump_unit_test_results(int n_test, struct unit_test test_params,
-                            double x1, double x2, solver_outcome test_n_roots);
-
-unit_test_res run_test(int n_test, struct unit_test test_params,
-                            double x1, double x2, solver_outcome test_n_roots);
 
 /**--------------------------------------------------
  * @brief choose solver for ax^2 + bx + c = 0
