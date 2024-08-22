@@ -9,11 +9,21 @@
 #include "square_solver.h"
 #include "all_service.h"
 
+/**
+ * \brief check if two double number are equal with precised accuracy
+ * \param x, y - double numbers to check
+ */
 bool are_equal(double x, double y)
 {
     return fabs(x - y) < ACCURACY;
 }
 
+/**
+ * \brief input coefficients for square solver from file
+ * \param coeff_p - pointer to structure with coefficients for square equation
+ * \param read_type - was file name written with flags or not
+ * \param file name - file to read from
+ */
 void file_input(struct coeffs * coeff_p, read_type_name read_type, char file_name[])
 {
     FILE *fp = NULL;
@@ -57,6 +67,11 @@ void file_input(struct coeffs * coeff_p, read_type_name read_type, char file_nam
     }
 }
 
+/**
+ * \brief read file name from cmd
+ * \param file name - for reading name of file
+ * \return true if file name read succesfully else false
+ */
 bool manual_read_file_name(char file_name[])
 {
     if(scanf("%19s", file_name) != 1)
@@ -70,6 +85,12 @@ bool manual_read_file_name(char file_name[])
     }
 }
 
+/**
+ * \brief open a file with perror in case of fail
+ * \param file name - name of file to open
+ * \param fp - pointer to pointer to file
+ * \return true if opened succesfully else false
+ */
 bool open_file(char file_name[], FILE **fp)
 {
     *fp = fopen(file_name, "r");
@@ -84,6 +105,10 @@ bool open_file(char file_name[], FILE **fp)
     }
 }
 
+/**
+ * \brief input coefficients for square equation from cmd
+ * \param coeff_p - pointer to structure with coefficients for square equation
+ */
 void std_input(struct coeffs * coeff_p)
 {
     printf("Enter a, b, c:\n");
@@ -96,6 +121,16 @@ void std_input(struct coeffs * coeff_p)
     }
 }
 
+/**
+ * \brief choosing solver for square equation
+ * \param sq_coeffs - coefficients for square equation
+ * \param x1 - pointer to the first root
+ * \param x2 - pointer to the second root
+ * \return square equation has : NO_ROOTS
+ *                               ONE_ROOT
+ *                               TWO_ROOTS
+ *                               INF_NUM_OF_ROOTS
+ */
 solver_outcome solver(struct coeffs sq_coeffs, double * x1, double * x2)
 {
 
@@ -114,6 +149,16 @@ solver_outcome solver(struct coeffs sq_coeffs, double * x1, double * x2)
 
 }
 
+/**
+ * \brief solve square equation
+ * \param sq_coeffs - coefficients for square equation
+ * \param x1 - pointer to the first root
+ * \param x2 - pointer to the second root
+ * \return square equation has : NO_ROOTS
+ *                               ONE_ROOT
+ *                               TWO_ROOTS
+ *                               INF_NUM_OF_ROOTS
+ */
 solver_outcome square_equation(struct coeffs sq_coeffs, double * x1, double * x2)
 {
 
@@ -144,6 +189,14 @@ solver_outcome square_equation(struct coeffs sq_coeffs, double * x1, double * x2
     }
 }
 
+/**
+ * \brief solves linear equation
+ * \param sq_coeffs - coefficients for square equation (coeff a = 0)
+ * \param x - pointer to the first root
+ * \return square equation has : NO_ROOTS
+ *                               ONE_ROOT
+ *                               INF_NUM_OF_ROOTS
+ */
 solver_outcome linear_equation(struct coeffs sq_coeffs, double * x)
 {
 
@@ -174,6 +227,12 @@ solver_outcome linear_equation(struct coeffs sq_coeffs, double * x)
     }
 }
 
+/**
+ * \brief prints solutions for square equation
+ * \param x1 - first root
+ * \param x2 - second root
+ * \param n_roots - number of roots
+ */
 void output_solutions(double x1, double x2, solver_outcome nRoots)
 {
     switch(nRoots)

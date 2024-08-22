@@ -7,6 +7,12 @@
 #include "square_solver.h"
 #include "unit_testing.h"
 
+/**
+ * \details look for mistakes in input
+ *          execute -h first if found
+ * \param argc - number of elements read from cmd
+ * \param argv - array of char arrays with elements read from cmd
+ */
 void check_flags(const int argc, const  char *argv[])
 {
     for(int n_flag = 1; n_flag < argc; n_flag++)
@@ -36,6 +42,18 @@ void check_flags(const int argc, const  char *argv[])
     }
 }
 
+/**
+ * \brief read and execute flags
+ * \param argc - number of elements read from cmd
+ * \param argv - array of char arrays with elements read from cmd
+ * \param coeff_p - pointer to structure with coefficients of square equation
+ * \param x1 - pointer to the first root
+ * \param x2 - pointer to the second root
+ * \param n_roots - number of roots will be written here
+ * \details -u start unit testing
+ *          -f input from file for square equation solver
+ *          -h print info about flags
+ */
 void execute_flags(const int argc, const char * argv[], coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots)
 {
     for(int n_flag = 1; n_flag < argc; n_flag++)
@@ -72,6 +90,12 @@ void execute_flags(const int argc, const char * argv[], coeffs coeff_p, double *
     }
 }
 
+/**
+ * \brief check if file name was written after flag -f
+ * \param argc - number of elements read from cmd
+ * \param argv - array of char arrays with elements read from cmd
+ * \param n_flag - flag number
+ */
 bool check_file_name(const int argc, const char *argv[], int n_flag)
 {
     if(n_flag < argc && argv[n_flag + 1][0] != '-')

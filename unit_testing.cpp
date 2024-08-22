@@ -4,6 +4,9 @@
 #include "unit_testing.h"
 #include "square_solver.h"
 
+/**
+ * \brief start unit testing
+ */
 void start_unit_testing()
 {
     const int n_tests = 3;
@@ -32,14 +35,22 @@ void start_unit_testing()
     }
 }
 
+/**
+ * \brief dump results of failed test
+ * \param n_test - number of failed test
+ * \param test_params - structure with coefficients of square equation and expected roots
+ * \param x1 - first root got from test
+ * \param x2 - second root got from test
+ * \param test_n_roots - number of roots got from test
+ */
 void dump_unit_test_results(int n_test, struct unit_test test_params,
                             double x1, double x2, solver_outcome test_n_roots)
 {
     printf("--------------------------------------------------\n"
                "RUN_TEST ERROR: test %d failed\n"
-               "Input: a = %f, b = %f, c = %f\n \n"
-               "Expected Output: x1 = %f; x2 = %f; n_roots = %d;\n"
-               "Solver Output:   x1 = %f; x2 = %f; n_roots = %d;\n"
+               "Input: a = %15f, b = %30f, c = %45f\n \n"
+               "Expected Output: x1 = %15f; x2 = %30f; n_roots = %45d;\n"
+               "Solver Output:   x1 = %15f; x2 = %30f; n_roots = %45d;\n"
                "--------------------------------------------------\n",
                n_test,
                test_params.coeffs_t.a,   test_params.coeffs_t.b,   test_params.coeffs_t.c,
@@ -47,6 +58,16 @@ void dump_unit_test_results(int n_test, struct unit_test test_params,
                x1,                       x2,                       test_n_roots);
 }
 
+/**
+ * \brief run single test from unit testing
+ * \param n_test - test number
+ * \param test_params - structure with coefficients for square equation,
+ *                      expected roots and their number
+ * \param x1 - variable for the first root
+ * \param x2 - variable for the second root
+ * \param n_roots - variable for the number of roots
+ * \return FAILED if test failed, else SUCCCED
+ */
 unit_test_res run_test(int n_test, struct unit_test test_params,
                     double x1, double x2, solver_outcome test_n_roots)
 {

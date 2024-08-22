@@ -4,7 +4,7 @@ CFLAGS =-Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-equa
 SOURCES = main.cpp all_service.cpp flags.cpp menu.cpp square_solver.cpp unit_testing.cpp
 EXECUTABLE = main
 
-all: $(SOURCES) $(EXECUTABLE)
+all: *.cpp
 
     $(EXECUTABLE): $(SOURCES)
 	    $(CC) $(SOURCES) $(CFLAGS)
