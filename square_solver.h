@@ -1,73 +1,45 @@
-#include "all_service.h"
+/**
+ * \file square_solver.h
+ * \brief solving cases of square equation
+ */
 
 #ifndef SQUARE_SOLVER_H__
 #define SQUARE_SOLVER_H__
 
-const double ACCURACY = 0.000001;
+#include "data.h"
 
-enum read_type_name{manual, with_flags};
-
-bool are_equal(double x, double y);
-
-void file_input(struct coeffs * coeff_p, read_type_name read_type, char file_name[]);
-
-bool manual_read_file_name(char file_name[]);
-
-bool open_file(char file_name[], FILE **fp);
-
-/**--------------------------------------------------
- * @brief read coefs for ax^2 + bx + c = 0
- *
- * @param a : coef before x^2
- * @param b : coef before x
- * @param c : free coef
- *
- * @return number of roots
-*/
-void std_input(struct coeffs * coeffs_p);
-
-/**--------------------------------------------------
- * @brief choose solver for ax^2 + bx + c = 0
- *
- * @param a : coef before x^2
- * @param b : coef before x
- * @param c : free coef
- * @param x1: pointer to the first root
- * @param x2: pointer to the second root
- *
- * @return number of roots
-*/
+/**
+ * \brief choosing solver for square equation
+ * \param sq_coeffs - coefficients for square equation
+ * \param x1 - pointer to the first root
+ * \param x2 - pointer to the second root
+ * \return square equation has : NO_ROOTS
+ *                               ONE_ROOT
+ *                               TWO_ROOTS
+ *                               INF_NUM_OF_ROOTS
+ */
 solver_outcome solver(struct coeffs square_coeffs, double * const x1, double * const x2);
 
-/**--------------------------------------------------
- * @brief solves square equation ax^2 + bx + c = 0
- *
- * @param a : coef before x^2
- * @param b : coef before x
- * @param c : free coef
- * @param x1: pointer to the first root
- * @param x2: pointer to the second root
- *
- * @return number of roots
-*/
+/**
+ * \brief solve square equation
+ * \param sq_coeffs - coefficients for square equation
+ * \param x1 - pointer to the first root
+ * \param x2 - pointer to the second root
+ * \return square equation has : NO_ROOTS
+ *                               ONE_ROOT
+ *                               TWO_ROOTS
+ *                               INF_NUM_OF_ROOTS
+ */
 solver_outcome square_equation(struct coeffs square_coeffs, double * const x1, double * const x2);
 
-/**--------------------------------------------------
- * @brief solves linear equation bx + c = 0
- * @param b : coef before x
- * @param c : free coef
- * @param x: pointer to the root
- * @return number of roots
-*/
+/**
+ * \brief solves linear equation
+ * \param sq_coeffs - coefficients for square equation (coeff a = 0)
+ * \param x - pointer to the first root
+ * \return square equation has : NO_ROOTS
+ *                               ONE_ROOT
+ *                               INF_NUM_OF_ROOTS
+ */
 solver_outcome linear_equation(struct coeffs square_coeffs, double * const x);
-
-/**--------------------------------------------------
- * @brief print solutions
- *
- * @param x1: pointer to the first root
- * @param x2: pointer to the second root
- * @param nRoots: number of roots
-*/
-void output_solutions(double x1, double x2, solver_outcome n_roots);
 
 #endif // SQUARE_SOLVER_H__

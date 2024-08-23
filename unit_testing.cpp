@@ -1,22 +1,12 @@
 #include <stdio.h>
 
-#include "all_service.h"
+#include "data.h"
 #include "unit_testing.h"
 #include "square_solver.h"
+#include "tests.h"
 
-/**
- * \brief start unit testing
- */
 void start_unit_testing()
 {
-    const int n_tests = 3;
-
-    unit_test test_params[n_tests] = {
-        {{1, 2, 1},     -1,  0, ONE_ROOT},
-        {{0, 0, 0},      0,  0, INF_ROOTS},
-        {{0, 8, 9}, -1.125,  0, ONE_ROOT},
-    };
-
     for(int n_test = 0; n_test < n_tests; n_test++)
     {
         double x1 = 0, x2 = 0;
@@ -35,15 +25,7 @@ void start_unit_testing()
     }
 }
 
-/**
- * \brief dump results of failed test
- * \param n_test - number of failed test
- * \param test_params - structure with coefficients of square equation and expected roots
- * \param x1 - first root got from test
- * \param x2 - second root got from test
- * \param test_n_roots - number of roots got from test
- */
-void dump_unit_test_results(int n_test, struct unit_test test_params,
+void dump_unit_test_results(int n_test, struct unit_test failed_test_params,
                             double x1, double x2, solver_outcome test_n_roots)
 {
     printf("--------------------------------------------------\n"
@@ -53,30 +35,20 @@ void dump_unit_test_results(int n_test, struct unit_test test_params,
                "Solver Output:   x1 = %15f; x2 = %30f; n_roots = %45d;\n"
                "--------------------------------------------------\n",
                n_test,
-               test_params.coeffs_t.a,   test_params.coeffs_t.b,   test_params.coeffs_t.c,
-               test_params.x1,           test_params.x2,           test_params.n_roots,
-               x1,                       x2,                       test_n_roots);
+               failed_test_params.coeffs_t.a,   failed_test_params.coeffs_t.b,   failed_test_params.coeffs_t.c,
+               failed_test_params.x1,           failed_test_params.x2,           failed_test_params.n_roots,
+               x1,                              x2,                              test_n_roots);
 }
 
-/**
- * \brief run single test from unit testing
- * \param n_test - test number
- * \param test_params - structure with coefficients for square equation,
- *                      expected roots and their number
- * \param x1 - variable for the first root
- * \param x2 - variable for the second root
- * \param n_roots - variable for the number of roots
- * \return FAILED if test failed, else SUCCCED
- */
-unit_test_res run_test(int n_test, struct unit_test test_params,
+unit_test_res run_test(int n_test, struct unit_test run_test_params,
                     double x1, double x2, solver_outcome test_n_roots)
 {
-    test_n_roots = solver(test_params.coeffs_t, &x1, &x2);
+    test_n_roots = solver(run_test_params.coeffs_t, &x1, &x2);
 
-    if(test_n_roots != test_params.n_roots || !are_equal(x1, test_params.x1)
-        || !are_equal(x2, test_params.x2))
+    if(test_n_roots != run_test_params.n_roots || !are_equal(x1, run_test_params.x1)
+        || !are_equal(x2, run_test_params.x2))
     {
-        dump_unit_test_results(n_test, test_params, x1, x2, test_n_roots);
+        dump_unit_test_results(n_test, run_test_params, x1, x2, test_n_roots);
         return FAILED;
     }
     else

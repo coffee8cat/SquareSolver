@@ -1,53 +1,70 @@
 #include <stdio.h>
 
-#include "all_service.h"
+#include "data.h"
 #include "menu.h"
 #include "flags.h"
+#include "output_and_reading_input.h"
 
-/**
- * \brief mode based on launch with flags or not
- * \param argc - number of elements read from cmd
- * \param argv - array with char arrays: elements read from cmd
- * \param coeff_p - pointer to structure with coefficients of square equation
- * \param x1 - pointer to the first root
- * \param x2 - pointer to the second root
- * \param n_roots - number of roots will be written here
- * \details in case without flags will run standart mode with cmd input and solving square equation
- * in case with flags will execute flag commands
- */
-void choose_mode(const int argc, const char * argv[], coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots)
+bool is_standart_mode(const int argc)
 {
-    if(argc > 1)
+    return argc == 1;
+}
+
+bool menu(struct coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots)
+{
+    char input = 'a';
+    print_choose_input();
+    while(true)
     {
-        check_flags(argc, argv);
-        execute_flags(argc, argv, coeff_p, x1, x2, n_roots);
-    }
-    else
-    {
-        std_mode_about();
+        while(scanf("%c", &input) != 1)
+        {
+            printf("Only f, c, q are read as answeres\n");
+            print_choose_input();
+        }
 
-        std_input(&coeff_p);
+        switch(input)
+        {
+            case 'f': char file_name[BUFSIZ];
+                      file_input(&coeff_p, file_name);
+                      n_roots = solver(coeff_p, x1, x2);
+                      output_solutions(*x1, *x2, n_roots);
 
-        n_roots = solver(coeff_p, x1, x2);
+                      return true;
+                      break;
 
-        output_solutions(*x1, *x2, n_roots);
+            case 'c': std_input(&coeff_p);
+                      n_roots = solver(coeff_p, x1, x2);
+                      output_solutions(*x1, *x2, n_roots);
+
+                      return true;
+                      break;
+
+            case 'q': printf("quit menu\n");
+                      return false;
+                      break;
+
+            default:  printf("Only f, c, q are read as answeres\n");
+                      break;
+        }
     }
 }
 
+void print_choose_input()
+{
+    printf("Choose input type:\n"
+           "File input:     f\n"
+           "Console input:  c\n"
+           "Quit:           q\n");
+}
 
-/**
- * \brief print info about flags
- */
 void help()
 {
     printf("Use flags below after a.exe:\n"
            " -u start solver unit testing\n"
            " -h ask for help about programm\n"
-           " -f reading coeffs from FILE\n\n");
+           " -f [file name] reading coeffs from FILE\n\n");
 }
-/**
- * \brief print welcoming message
- */
+
 void welcome()
 {
     printf("# Square Solver\n"
@@ -55,9 +72,6 @@ void welcome()
            "-------------------------------------\n\n");
 }
 
-/**
- * \brief print mode name and about -h flag for help
- */
 void std_mode_about()
 {
     printf("# use a.exe -h for help\n"

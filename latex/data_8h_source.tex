@@ -1,0 +1,39 @@
+\doxysection{data.\+h}
+\hypertarget{data_8h_source}{}\label{data_8h_source}\mbox{\hyperlink{data_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ ALL\_SERVICE\_SQUARE\_EQUATION\_H\_\_}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ ALL\_SERVICE\_SQUARE\_EQUATION\_H\_\_}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ ACCURACY\ =\ 0.000001;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structflags__init}{flags\_init}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structflags__init_af6f8e648d55378e20d96c7a7912c37b4}{is\_help}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structflags__init_ae734b0106969a5d57de7991febd0ebec}{is\_unit\_testing}};\ \ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structflags__init_a641fc22fc50ab7c6e75e939038a274c1}{is\_file\_input}};\ \ \ \ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structflags__init_ab48e0c0887fc7c92a2e2d778eea80413}{name\_of\_file}}[50];\ }
+\DoxyCodeLine{00018\ \};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcoeffs}{coeffs}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structcoeffs_aab8be193bdbd4197b468032a31afff0d}{a}};\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structcoeffs_a079531c1747a7769c0e468d9ff3570ab}{b}};\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structcoeffs_a54f218566280c21636ef020cd565da5f}{c}};\ }
+\DoxyCodeLine{00026\ \};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{data_8h_a8fca040b97b50f4e10ad8342e8e4747e}{solver\_outcome}}}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ NO\_ROOTS,}
+\DoxyCodeLine{00032\ \ \ \ \ ONE\_ROOT,}
+\DoxyCodeLine{00033\ \ \ \ \ TWO\_ROOTS,}
+\DoxyCodeLine{00034\ \ \ \ \ INF\_ROOTS}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{data_8h_ac83fc12a17c4aed8648efcbdac52a138}{clean\_input\_buff}}();}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{data_8h_ac821843094a30b9e788ab86ea202389e}{are\_equal}}(\textcolor{keywordtype}{double}\ x,\ \textcolor{keywordtype}{double}\ y);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ALL\_SERVICE\_SQUARE\_EQUATION\_H\_\_}}
+
+\end{DoxyCode}

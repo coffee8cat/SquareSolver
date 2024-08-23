@@ -1,109 +1,95 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
-#include "all_service.h"
+#include "data.h"
 #include "flags.h"
 #include "menu.h"
 #include "square_solver.h"
 #include "unit_testing.h"
+#include "output_and_reading_input.h"
 
-/**
- * \details look for mistakes in input
- *          execute -h first if found
- * \param argc - number of elements read from cmd
- * \param argv - array of char arrays with elements read from cmd
- */
-void check_flags(const int argc, const  char *argv[])
+void standart_mode()
 {
-    for(int n_flag = 1; n_flag < argc; n_flag++)
+    coeffs sq_coeffs = {0, 0, 0};
+    double x1 = 0, x2 = 0;
+    solver_outcome n_roots = NO_ROOTS;
+
+    printf("[standart mode]\n\n");
+
+    std_input(&sq_coeffs);
+    n_roots = solver(sq_coeffs, &x1, &x2);
+    output_solutions(x1, x2, n_roots);
+}
+
+void check_flags(struct flags_init * flags_values, const int argc, char * const argv[])
+{
+    int opt = 0;
+    char optstring[] = "huf:";
+    while ((opt = getopt(argc, argv, optstring)) != -1)
     {
-        bool help_state = false;
-
-        if(argv[n_flag][0] == '-')
+        switch (opt)
         {
-            switch(argv[n_flag][1])
-            {
-                case 'h': if(!help_state)
-                          {
-                              help();
-                              help_state = true;
-                              break;
-                          }
-                          break;
+            case 'h':
+                flags_values -> is_help = true;
+                break;
 
-                case 'u': break;
+            case 'u':
+                flags_values -> is_unit_testing = true;
+                break;
+            case 'f':
+                flags_values -> is_file_input = true;
+                strncpy(flags_values -> name_of_file, optarg, strlen(optarg));
+                break;
 
-                case 'f': break;
+            case ':':
+                printf("option -%c needs a value\n", optopt);
+                break;
 
-                default:  printf("flag error: No such flag\n");
-                          break;
-            }
+            case '?':
+                printf("Unknown option: %c\n", optopt);
+                break;
+
+            default:
+                printf("option read error\n");
+                break;
         }
     }
 }
 
-/**
- * \brief read and execute flags
- * \param argc - number of elements read from cmd
- * \param argv - array of char arrays with elements read from cmd
- * \param coeff_p - pointer to structure with coefficients of square equation
- * \param x1 - pointer to the first root
- * \param x2 - pointer to the second root
- * \param n_roots - number of roots will be written here
- * \details -u start unit testing
- *          -f input from file for square equation solver
- *          -h print info about flags
- */
-void execute_flags(const int argc, const char * argv[], coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots)
+/*void check_file_name_after_f(char * const argv[], int n_flag, struct flags_init * flags_values)
 {
-    for(int n_flag = 1; n_flag < argc; n_flag++)
+    if(argv[n_flag][2] == '=')
     {
-        if(argv[n_flag][0] == '-')
+        int n_flag_size = sizeof(argv[n_flag]);
+        for(int i=3; i < n_flag_size; i++)
         {
-            switch(argv[n_flag][1])
-            {
-                case 'u': start_unit_testing();
-                          break;
-
-                case 'f': char file_name[20];
-                          if(check_file_name(argc, argv, n_flag))
-                          {
-                              strncpy(file_name, argv[n_flag+1], 20);
-                              file_input(&coeff_p, with_flags, file_name);
-                              n_flag++;
-                          }
-                          else
-                          {
-                              file_input(&coeff_p, manual, file_name);
-                          }
-                          n_roots = solver(coeff_p, x1, x2);
-                          output_solutions(*x1, *x2, n_roots);
-                          break;
-
-                default:  break;
-            }
+            flags_values -> name_of_file[i-3] = argv[n_flag][i];
         }
-        else
-        {
-            printf("flag read error: incorrect input in position %d\n", n_flag + 1);
-        }
-    }
-}
-
-/**
- * \brief check if file name was written after flag -f
- * \param argc - number of elements read from cmd
- * \param argv - array of char arrays with elements read from cmd
- * \param n_flag - flag number
- */
-bool check_file_name(const int argc, const char *argv[], int n_flag)
-{
-    if(n_flag < argc && argv[n_flag + 1][0] != '-')
-    {
-        return true;
     }
     else
     {
-        return false;
+        printf("-f syntax error: use -f=file_name.txt\n");
     }
+}*/
+
+void execute_file_reading(struct flags_init * flags_values)
+{
+    coeffs sq_coeffs = {0, 0, 0};
+    double x1 = 0, x2 = 0;
+    solver_outcome n_roots = NO_ROOTS;
+
+    bool reading_file = file_input(&sq_coeffs, flags_values -> name_of_file);
+
+    if(reading_file)
+    {
+        n_roots = solver(sq_coeffs, &x1, &x2);
+        output_solutions(x1, x2, n_roots);
+    }
+    else
+    {
+        printf("call menu\n");
+        menu(sq_coeffs, &x1, &x2, n_roots);
+    }
+
 }

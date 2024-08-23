@@ -1,0 +1,84 @@
+\doxysection{flags.\+h File Reference}
+\hypertarget{flags_8h}{}\label{flags_8h}\index{flags.h@{flags.h}}
+
+
+handling executing flags functions  
+
+
+{\ttfamily \#include "{}data.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{flags_8h_a3d5bf36bb7a85abbe18f50ad9bca2b93}\label{flags_8h_a3d5bf36bb7a85abbe18f50ad9bca2b93} 
+void {\bfseries standart\+\_\+mode} ()
+\begin{DoxyCompactList}\small\item\em read coefficients from standart input once and solve the equation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{flags_8h_a4b3333e60db970141509e88071884f11}{check\+\_\+flags}} (\mbox{\hyperlink{structflags__init}{flags\+\_\+init}} \texorpdfstring{$\ast$}{*}flags\+\_\+values, const int argc, const char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\item 
+\Hypertarget{flags_8h_aa7f321041b97bc165dfb20babe0a3c7b}\label{flags_8h_aa7f321041b97bc165dfb20babe0a3c7b} 
+void {\bfseries check\+\_\+file\+\_\+name\+\_\+after\+\_\+f} (const char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]}, int n\+\_\+flag, struct \mbox{\hyperlink{structflags__init}{flags\+\_\+init}} \texorpdfstring{$\ast$}{*}flags\+\_\+values)
+\item 
+void \mbox{\hyperlink{flags_8h_ab8e878b736f5835077878c0b44f07ed0}{execute\+\_\+file\+\_\+reading}} (struct \mbox{\hyperlink{structflags__init}{flags\+\_\+init}} \texorpdfstring{$\ast$}{*}flags\+\_\+values)
+\begin{DoxyCompactList}\small\item\em execute flag -\/f\+: read coeffs from file and solve square equation \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{flags_8h_a17d51be73fd954b2c2b036dfcb9a661c}{check\+\_\+file\+\_\+name}} (const int argc, const char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]}, int n\+\_\+flag)
+\begin{DoxyCompactList}\small\item\em check if file name was written after flag -\/f \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+handling executing flags functions 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{flags_8h_a17d51be73fd954b2c2b036dfcb9a661c}\index{flags.h@{flags.h}!check\_file\_name@{check\_file\_name}}
+\index{check\_file\_name@{check\_file\_name}!flags.h@{flags.h}}
+\doxysubsubsection{\texorpdfstring{check\_file\_name()}{check\_file\_name()}}
+{\footnotesize\ttfamily \label{flags_8h_a17d51be73fd954b2c2b036dfcb9a661c} 
+bool check\+\_\+file\+\_\+name (\begin{DoxyParamCaption}\item[{const int}]{argc}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{argv}{\mbox{[}$\,$\mbox{]}, }\item[{int}]{n\+\_\+flag}{}\end{DoxyParamCaption})}
+
+
+
+check if file name was written after flag -\/f 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & -\/ number of elements read from cmd \\
+\hline
+{\em argv} & -\/ array of char arrays with elements read from cmd \\
+\hline
+{\em n\+\_\+flag} & -\/ flag number \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if file name was written with flags else false 
+\end{DoxyReturn}
+\Hypertarget{flags_8h_a4b3333e60db970141509e88071884f11}\index{flags.h@{flags.h}!check\_flags@{check\_flags}}
+\index{check\_flags@{check\_flags}!flags.h@{flags.h}}
+\doxysubsubsection{\texorpdfstring{check\_flags()}{check\_flags()}}
+{\footnotesize\ttfamily \label{flags_8h_a4b3333e60db970141509e88071884f11} 
+void check\+\_\+flags (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structflags__init}{flags\+\_\+init}} \texorpdfstring{$\ast$}{*}}]{flags\+\_\+values}{, }\item[{const int}]{argc}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{argv}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+look for mistakes in input execute -\/h first if found 
+\begin{DoxyParams}{Parameters}
+{\em flags\+\_\+values} & -\/ pointer to structure for setting vars to execute flags \\
+\hline
+{\em argc} & -\/ number of elements read from cmd \\
+\hline
+{\em argv} & -\/ array of char arrays with elements read from cmd \\
+\hline
+\end{DoxyParams}
+\Hypertarget{flags_8h_ab8e878b736f5835077878c0b44f07ed0}\index{flags.h@{flags.h}!execute\_file\_reading@{execute\_file\_reading}}
+\index{execute\_file\_reading@{execute\_file\_reading}!flags.h@{flags.h}}
+\doxysubsubsection{\texorpdfstring{execute\_file\_reading()}{execute\_file\_reading()}}
+{\footnotesize\ttfamily \label{flags_8h_ab8e878b736f5835077878c0b44f07ed0} 
+void execute\+\_\+file\+\_\+reading (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structflags__init}{flags\+\_\+init}} \texorpdfstring{$\ast$}{*}}]{flags\+\_\+values}{}\end{DoxyParamCaption})}
+
+
+
+execute flag -\/f\+: read coeffs from file and solve square equation 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flag\+\_\+values} & -\/ pointer to structure to get file name order in argv\\
+\hline
+\end{DoxyParams}
+file input will be quit with reading "{}-\/-\/q"{} as file name 

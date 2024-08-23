@@ -1,0 +1,89 @@
+\doxysection{square\+\_\+solver.\+h File Reference}
+\hypertarget{square__solver_8h}{}\label{square__solver_8h}\index{square\_solver.h@{square\_solver.h}}
+
+
+solving cases of square equation  
+
+
+{\ttfamily \#include "{}data.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{data_8h_a8fca040b97b50f4e10ad8342e8e4747e}{solver\+\_\+outcome}} \mbox{\hyperlink{square__solver_8h_a2f39b16426dd0527234b2e562f8d9c25}{solver}} (struct \mbox{\hyperlink{structcoeffs}{coeffs}} square\+\_\+coeffs, double \texorpdfstring{$\ast$}{*}const x1, double \texorpdfstring{$\ast$}{*}const x2)
+\begin{DoxyCompactList}\small\item\em choosing solver for square equation \end{DoxyCompactList}\item 
+\mbox{\hyperlink{data_8h_a8fca040b97b50f4e10ad8342e8e4747e}{solver\+\_\+outcome}} \mbox{\hyperlink{square__solver_8h_a66af53855224f6c8334687656963e4b0}{square\+\_\+equation}} (struct \mbox{\hyperlink{structcoeffs}{coeffs}} square\+\_\+coeffs, double \texorpdfstring{$\ast$}{*}const x1, double \texorpdfstring{$\ast$}{*}const x2)
+\begin{DoxyCompactList}\small\item\em solve square equation \end{DoxyCompactList}\item 
+\mbox{\hyperlink{data_8h_a8fca040b97b50f4e10ad8342e8e4747e}{solver\+\_\+outcome}} \mbox{\hyperlink{square__solver_8h_a176d4a1e27477cca27c2247691623510}{linear\+\_\+equation}} (struct \mbox{\hyperlink{structcoeffs}{coeffs}} square\+\_\+coeffs, double \texorpdfstring{$\ast$}{*}const x)
+\begin{DoxyCompactList}\small\item\em solves linear equation \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+solving cases of square equation 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{square__solver_8h_a176d4a1e27477cca27c2247691623510}\index{square\_solver.h@{square\_solver.h}!linear\_equation@{linear\_equation}}
+\index{linear\_equation@{linear\_equation}!square\_solver.h@{square\_solver.h}}
+\doxysubsubsection{\texorpdfstring{linear\_equation()}{linear\_equation()}}
+{\footnotesize\ttfamily \label{square__solver_8h_a176d4a1e27477cca27c2247691623510} 
+\mbox{\hyperlink{data_8h_a8fca040b97b50f4e10ad8342e8e4747e}{solver\+\_\+outcome}} linear\+\_\+equation (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structcoeffs}{coeffs}}}]{square\+\_\+coeffs}{, }\item[{double \texorpdfstring{$\ast$}{*}const}]{x}{}\end{DoxyParamCaption})}
+
+
+
+solves linear equation 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sq\+\_\+coeffs} & -\/ coefficients for square equation (coeff a = 0) \\
+\hline
+{\em x} & -\/ pointer to the first root \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+square equation has \+: NO\+\_\+\+ROOTS ONE\+\_\+\+ROOT INF\+\_\+\+NUM\+\_\+\+OF\+\_\+\+ROOTS 
+\end{DoxyReturn}
+\Hypertarget{square__solver_8h_a2f39b16426dd0527234b2e562f8d9c25}\index{square\_solver.h@{square\_solver.h}!solver@{solver}}
+\index{solver@{solver}!square\_solver.h@{square\_solver.h}}
+\doxysubsubsection{\texorpdfstring{solver()}{solver()}}
+{\footnotesize\ttfamily \label{square__solver_8h_a2f39b16426dd0527234b2e562f8d9c25} 
+\mbox{\hyperlink{data_8h_a8fca040b97b50f4e10ad8342e8e4747e}{solver\+\_\+outcome}} solver (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structcoeffs}{coeffs}}}]{square\+\_\+coeffs}{, }\item[{double \texorpdfstring{$\ast$}{*}const}]{x1}{, }\item[{double \texorpdfstring{$\ast$}{*}const}]{x2}{}\end{DoxyParamCaption})}
+
+
+
+choosing solver for square equation 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sq\+\_\+coeffs} & -\/ coefficients for square equation \\
+\hline
+{\em x1} & -\/ pointer to the first root \\
+\hline
+{\em x2} & -\/ pointer to the second root \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+square equation has \+: NO\+\_\+\+ROOTS ONE\+\_\+\+ROOT TWO\+\_\+\+ROOTS INF\+\_\+\+NUM\+\_\+\+OF\+\_\+\+ROOTS 
+\end{DoxyReturn}
+\Hypertarget{square__solver_8h_a66af53855224f6c8334687656963e4b0}\index{square\_solver.h@{square\_solver.h}!square\_equation@{square\_equation}}
+\index{square\_equation@{square\_equation}!square\_solver.h@{square\_solver.h}}
+\doxysubsubsection{\texorpdfstring{square\_equation()}{square\_equation()}}
+{\footnotesize\ttfamily \label{square__solver_8h_a66af53855224f6c8334687656963e4b0} 
+\mbox{\hyperlink{data_8h_a8fca040b97b50f4e10ad8342e8e4747e}{solver\+\_\+outcome}} square\+\_\+equation (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structcoeffs}{coeffs}}}]{square\+\_\+coeffs}{, }\item[{double \texorpdfstring{$\ast$}{*}const}]{x1}{, }\item[{double \texorpdfstring{$\ast$}{*}const}]{x2}{}\end{DoxyParamCaption})}
+
+
+
+solve square equation 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sq\+\_\+coeffs} & -\/ coefficients for square equation \\
+\hline
+{\em x1} & -\/ pointer to the first root \\
+\hline
+{\em x2} & -\/ pointer to the second root \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+square equation has \+: NO\+\_\+\+ROOTS ONE\+\_\+\+ROOT TWO\+\_\+\+ROOTS INF\+\_\+\+NUM\+\_\+\+OF\+\_\+\+ROOTS 
+\end{DoxyReturn}

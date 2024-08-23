@@ -1,0 +1,88 @@
+\doxysection{unit\+\_\+testing.\+h File Reference}
+\hypertarget{unit__testing_8h}{}\label{unit__testing_8h}\index{unit\_testing.h@{unit\_testing.h}}
+
+
+unit\+\_\+testing functions and structures  
+
+
+{\ttfamily \#include "{}data.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structunit__test}{unit\+\_\+test}}
+\begin{DoxyCompactList}\small\item\em data for single unit test \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{unit__testing_8h_aeccc141e9fc99f50fd9aa8b3c78dc98e}\label{unit__testing_8h_aeccc141e9fc99f50fd9aa8b3c78dc98e} 
+enum \mbox{\hyperlink{unit__testing_8h_aeccc141e9fc99f50fd9aa8b3c78dc98e}{unit\+\_\+test\+\_\+res}} \{ {\bfseries SUCCEED}
+, {\bfseries FAILED}
+ \}
+\begin{DoxyCompactList}\small\item\em \doxylink{structunit__test}{unit\+\_\+test} result \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{unit__testing_8h_a73c7b27e022352256bb62f36017ccf85}\label{unit__testing_8h_a73c7b27e022352256bb62f36017ccf85} 
+void {\bfseries start\+\_\+unit\+\_\+testing} ()
+\begin{DoxyCompactList}\small\item\em start unit testing \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{unit__testing_8h_af79010ccc0a9ef28bda65edce1eaef69}{dump\+\_\+unit\+\_\+test\+\_\+results}} (int n\+\_\+test, struct \mbox{\hyperlink{structunit__test}{unit\+\_\+test}} \mbox{\hyperlink{tests_8h_acf029edb0be5bf98da4d5c1e29bc14d7}{test\+\_\+params}}, double x1, double x2, \mbox{\hyperlink{data_8h_a8fca040b97b50f4e10ad8342e8e4747e}{solver\+\_\+outcome}} test\+\_\+n\+\_\+roots)
+\begin{DoxyCompactList}\small\item\em dump results of failed test \end{DoxyCompactList}\item 
+\mbox{\hyperlink{unit__testing_8h_aeccc141e9fc99f50fd9aa8b3c78dc98e}{unit\+\_\+test\+\_\+res}} \mbox{\hyperlink{unit__testing_8h_a6caa4739e0bafa6eda6e3f47b552ab1d}{run\+\_\+test}} (int n\+\_\+test, struct \mbox{\hyperlink{structunit__test}{unit\+\_\+test}} \mbox{\hyperlink{tests_8h_acf029edb0be5bf98da4d5c1e29bc14d7}{test\+\_\+params}}, double x1, double x2, \mbox{\hyperlink{data_8h_a8fca040b97b50f4e10ad8342e8e4747e}{solver\+\_\+outcome}} test\+\_\+n\+\_\+roots)
+\begin{DoxyCompactList}\small\item\em run single test from unit testing \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+unit\+\_\+testing functions and structures 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{unit__testing_8h_af79010ccc0a9ef28bda65edce1eaef69}\index{unit\_testing.h@{unit\_testing.h}!dump\_unit\_test\_results@{dump\_unit\_test\_results}}
+\index{dump\_unit\_test\_results@{dump\_unit\_test\_results}!unit\_testing.h@{unit\_testing.h}}
+\doxysubsubsection{\texorpdfstring{dump\_unit\_test\_results()}{dump\_unit\_test\_results()}}
+{\footnotesize\ttfamily \label{unit__testing_8h_af79010ccc0a9ef28bda65edce1eaef69} 
+void dump\+\_\+unit\+\_\+test\+\_\+results (\begin{DoxyParamCaption}\item[{int}]{n\+\_\+test}{, }\item[{struct \mbox{\hyperlink{structunit__test}{unit\+\_\+test}}}]{test\+\_\+params}{, }\item[{double}]{x1}{, }\item[{double}]{x2}{, }\item[{\mbox{\hyperlink{data_8h_a8fca040b97b50f4e10ad8342e8e4747e}{solver\+\_\+outcome}}}]{test\+\_\+n\+\_\+roots}{}\end{DoxyParamCaption})}
+
+
+
+dump results of failed test 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n\+\_\+test} & -\/ number of failed test \\
+\hline
+{\em test\+\_\+params} & -\/ structure with coefficients of square equation and expected roots \\
+\hline
+{\em x1} & -\/ first root got from test \\
+\hline
+{\em x2} & -\/ second root got from test \\
+\hline
+{\em test\+\_\+n\+\_\+roots} & -\/ number of roots got from test \\
+\hline
+\end{DoxyParams}
+\Hypertarget{unit__testing_8h_a6caa4739e0bafa6eda6e3f47b552ab1d}\index{unit\_testing.h@{unit\_testing.h}!run\_test@{run\_test}}
+\index{run\_test@{run\_test}!unit\_testing.h@{unit\_testing.h}}
+\doxysubsubsection{\texorpdfstring{run\_test()}{run\_test()}}
+{\footnotesize\ttfamily \label{unit__testing_8h_a6caa4739e0bafa6eda6e3f47b552ab1d} 
+\mbox{\hyperlink{unit__testing_8h_aeccc141e9fc99f50fd9aa8b3c78dc98e}{unit\+\_\+test\+\_\+res}} run\+\_\+test (\begin{DoxyParamCaption}\item[{int}]{n\+\_\+test}{, }\item[{struct \mbox{\hyperlink{structunit__test}{unit\+\_\+test}}}]{test\+\_\+params}{, }\item[{double}]{x1}{, }\item[{double}]{x2}{, }\item[{\mbox{\hyperlink{data_8h_a8fca040b97b50f4e10ad8342e8e4747e}{solver\+\_\+outcome}}}]{test\+\_\+n\+\_\+roots}{}\end{DoxyParamCaption})}
+
+
+
+run single test from unit testing 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n\+\_\+test} & -\/ test number \\
+\hline
+{\em test\+\_\+params} & -\/ structure with coefficients for square equation, expected roots and their number \\
+\hline
+{\em x1} & -\/ variable for the first root \\
+\hline
+{\em x2} & -\/ variable for the second root \\
+\hline
+{\em n\+\_\+roots} & -\/ variable for the number of roots \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+FAILED if test failed, else SUCCCED 
+\end{DoxyReturn}

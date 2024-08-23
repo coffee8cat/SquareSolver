@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['test_5finput_0',['test_input',['../structtest__input.html',1,'']]]
+  ['flags_5finit_0',['flags_init',['../structflags__init.html',1,'']]]
 ];
