@@ -1,3 +1,4 @@
+#define TX_COMPILED
 #include <TXLib.h>
 
 #include "data.h"

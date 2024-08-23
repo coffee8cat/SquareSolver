@@ -19,6 +19,11 @@ EXECUTABLE = sqsolver.exe
 all: $(SOURCES) $(BUILD_DIR)
 	$(CC) $(SOURCES) -o $(BUILD_DIR)/$(EXECUTABLE) -I$(HEADERS_DIR) $(CFLAGS)
 
+%.o: %.cpp
+	$(CC) $(CFLAGS) -I$(HEADERS_DIR) $< -c -o $@
+
+%.exe: %.o
+	$< -o $(BUILD_DIR)/$(EXECUTABLE)
 clean:
 	rm $(BUILD)
 
