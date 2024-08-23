@@ -12,23 +12,23 @@ int main(const int argc, char * const argv[])
 
     check_flags(&flags_values, argc, argv);
 
-    if(is_standart_mode(argc))
+    if (is_standart_mode(argc))
     {
         standart_mode();
     }
     else
     {
-        if(flags_values.is_help)
+        if (flags_values.is_help)
         {
             help();
         }
-        if(flags_values.is_unit_testing)
+        if (flags_values.is_unit_testing)
         {
             start_unit_testing();
         }
-        if(flags_values.is_file_input)
+        if (flags_values.is_file_input)
         {
-            execute_file_reading(&flags_values);
+            execute_file_input_mode(flags_values.name_of_file);
         }
     }
 }

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <math.h>
+#include <assert.h>
 
 #include "data.h"
 #include "flags.h"
@@ -24,6 +26,9 @@ void standart_mode()
 
 void check_flags(struct flags_init * flags_values, const int argc, char * const argv[])
 {
+    assert(flags_values != NULL);
+    assert(argv != NULL);
+
     int opt = 0;
     char optstring[] = "huf:";
     while ((opt = getopt(argc, argv, optstring)) != -1)
@@ -37,6 +42,7 @@ void check_flags(struct flags_init * flags_values, const int argc, char * const 
             case 'u':
                 flags_values -> is_unit_testing = true;
                 break;
+
             case 'f':
                 flags_values -> is_file_input = true;
                 strncpy(flags_values -> name_of_file, optarg, strlen(optarg));
@@ -57,39 +63,34 @@ void check_flags(struct flags_init * flags_values, const int argc, char * const 
     }
 }
 
-/*void check_file_name_after_f(char * const argv[], int n_flag, struct flags_init * flags_values)
+void execute_file_input_mode(char name_of_file[])
 {
-    if(argv[n_flag][2] == '=')
+    assert(name_of_file != NULL);
+
+    coeffs sq_coeffs[MAX_FILE_INPUTS];
+
+    double x1 = 0, x2 = 0;
+    solver_outcome n_roots = NO_ROOTS;
+
+    int n_read = 0;
+
+    bool reading_file = file_input(sq_coeffs, name_of_file, &n_read);
+
+    if (reading_file)
     {
-        int n_flag_size = sizeof(argv[n_flag]);
-        for(int i=3; i < n_flag_size; i++)
+        for (int i=0; i < n_read; i++)
         {
-            flags_values -> name_of_file[i-3] = argv[n_flag][i];
+            printf("equation number %d\n"
+                   "a = %f; b = %f, c = %f\n",
+                   i, sq_coeffs[i].a, sq_coeffs[i].b, sq_coeffs[i].c);
+            n_roots = solver(sq_coeffs[i], &x1, &x2);
+            output_solutions(x1, x2, n_roots);
         }
     }
     else
     {
-        printf("-f syntax error: use -f=file_name.txt\n");
-    }
-}*/
-
-void execute_file_reading(struct flags_init * flags_values)
-{
-    coeffs sq_coeffs = {0, 0, 0};
-    double x1 = 0, x2 = 0;
-    solver_outcome n_roots = NO_ROOTS;
-
-    bool reading_file = file_input(&sq_coeffs, flags_values -> name_of_file);
-
-    if(reading_file)
-    {
-        n_roots = solver(sq_coeffs, &x1, &x2);
-        output_solutions(x1, x2, n_roots);
-    }
-    else
-    {
         printf("call menu\n");
-        menu(sq_coeffs, &x1, &x2, n_roots);
+        menu(&x1, &x2, n_roots);
     }
 
 }

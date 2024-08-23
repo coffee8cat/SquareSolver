@@ -23,7 +23,7 @@
  */
 bool is_standart_mode(const int argc);
 
-bool menu(struct coeffs coeff_p, double * x1, double * x2, solver_outcome n_roots);
+bool menu(double * x1, double * x2, solver_outcome n_roots);
 
 void print_choose_input();
 /**

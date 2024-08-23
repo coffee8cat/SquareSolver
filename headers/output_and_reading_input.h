@@ -8,6 +8,8 @@
 
 #include "data.h"
 
+const int MAX_FILE_INPUTS = 100;
+
 /// @brief where to read file name from
 enum read_type_name
 {
@@ -21,7 +23,7 @@ enum read_type_name
  * \param read_type - was file name written with flags or not
  * \param file name - file to read from
  */
-bool file_input(struct coeffs * coeff_p, char file_name[]);
+bool file_input(struct coeffs sq_coeffs[MAX_FILE_INPUTS], char file_name[], int * n_read);
 
 /**
  * \brief user-friendly read file name and open file with error handling

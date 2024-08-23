@@ -30,6 +30,6 @@ void check_flags(struct flags_init * flags_values, const int argc, char * const 
  * \param flag_values - pointer to structure to get file name order in argv
  * \details file input will be quit with reading "--q" as file name
  */
-void execute_file_reading(struct flags_init * flags_values);
+void execute_file_input_mode(char name_of_file[]);
 
 #endif //SQUARE_SOLVER_FLAGS_H__
