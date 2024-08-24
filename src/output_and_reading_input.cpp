@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <string.h>
-#include <assert.h>
 #include <math.h>
 
 #include "data.h"
+#include "my_macros.h"
 #include "output_and_reading_input.h"
 #include "square_solver.h"
 
 bool file_input(struct coeffs coeff_p[MAX_FILE_INPUTS], char file_name[], int * n_read)
 {
-    assert(coeff_p != NULL);
-    assert(file_name != NULL);
-    assert(n_read != NULL);
+    my_assert(coeff_p != NULL);
+    my_assert(file_name != NULL);
+    my_assert(n_read != NULL);
 
     FILE *fp = NULL;
 
@@ -45,8 +45,8 @@ bool file_input(struct coeffs coeff_p[MAX_FILE_INPUTS], char file_name[], int * 
 
 bool read_file_name_and_open(FILE ** fp, char file_name[])
 {
-    assert(fp != NULL);
-    assert(file_name != NULL);
+    my_assert(fp != NULL);
+    my_assert(file_name != NULL);
 
     while (true)
     {
@@ -78,7 +78,7 @@ bool read_file_name_and_open(FILE ** fp, char file_name[])
 
 void std_input(struct coeffs * coeff_p)
 {
-    assert(coeff_p != NULL);
+    my_assert(coeff_p != NULL);
 
     printf("Enter a, b, c:\n");
 
@@ -92,8 +92,8 @@ void std_input(struct coeffs * coeff_p)
 
 void output_solutions(double x1, double x2, solver_outcome nRoots)
 {
-    assert (isfinite (x1));
-    assert (isfinite (x2));
+    my_assert (isfinite (x1));
+    my_assert (isfinite (x2));
     switch(nRoots)
     {
 

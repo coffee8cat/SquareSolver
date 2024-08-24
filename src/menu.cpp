@@ -1,8 +1,7 @@
 #include <stdio.h>
-#include <assert.h>
-
 
 #include "data.h"
+#include "my_macros.h"
 #include "menu.h"
 #include "flags.h"
 #include "output_and_reading_input.h"
@@ -14,8 +13,8 @@ bool is_standart_mode(const int argc)
 
 bool menu(double * x1, double * x2, solver_outcome n_roots)
 {
-    assert(x1 != NULL);
-    assert(x2 != NULL);
+    my_assert(x1 != NULL);
+    my_assert(x2 != NULL);
 
     coeffs sq_coeffs = {0, 0, 0};
 

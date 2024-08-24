@@ -2,9 +2,9 @@
 #include <string.h>
 #include <unistd.h>
 #include <math.h>
-#include <assert.h>
 
 #include "data.h"
+#include "my_macros.h"
 #include "flags.h"
 #include "menu.h"
 #include "square_solver.h"
@@ -26,11 +26,11 @@ void standart_mode()
 
 void check_flags(struct flags_init * flags_values, const int argc, char * const argv[])
 {
-    assert(flags_values != NULL);
-    assert(argv != NULL);
+    my_assert(flags_values != NULL);
+    my_assert(argv != NULL);
 
     int opt = 0;
-    char optstring[] = "huf:";
+    const char optstring[] = "huf:";
     while ((opt = getopt(argc, argv, optstring)) != -1)
     {
         switch (opt)
@@ -65,7 +65,7 @@ void check_flags(struct flags_init * flags_values, const int argc, char * const 
 
 void execute_file_input_mode(char name_of_file[])
 {
-    assert(name_of_file != NULL);
+    my_assert(name_of_file != NULL);
 
     coeffs sq_coeffs[MAX_FILE_INPUTS];
 
@@ -75,7 +75,6 @@ void execute_file_input_mode(char name_of_file[])
     int n_read = 0;
 
     bool reading_file = file_input(sq_coeffs, name_of_file, &n_read);
-
     if (reading_file)
     {
         for (int i=0; i < n_read; i++)
@@ -92,5 +91,4 @@ void execute_file_input_mode(char name_of_file[])
         printf("call menu\n");
         menu(&x1, &x2, n_roots);
     }
-
 }

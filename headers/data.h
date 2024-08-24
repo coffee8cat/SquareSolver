@@ -7,10 +7,19 @@
 #define ALL_SERVICE_SQUARE_EQUATION_H__
 
 #include <stdio.h>
+#include <math.h>
 
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
+
+#define print_red(...)  printf(ANSI_COLOR_RED);\
+                        printf(__VA_ARGS__); \
+                        printf(ANSI_COLOR_RESET)
+
+#define print_green(...)    printf(ANSI_COLOR_GREEN);\
+                            printf(__VA_ARGS__); \
+                            printf(ANSI_COLOR_RESET)
 
 const double ACCURACY = 0.000001; ///< accuracy for all calculations in programm
 
@@ -43,13 +52,20 @@ enum solver_outcome
 /**
  * \brief clean input buffer
  */
-void clean_input_buff();
+inline void clean_input_buff()
+{
+    while (getchar() != '\n')
+        continue;
+}
 
 /**
  * \brief check if two double number are equal with precised accuracy
  * \param x, y - double numbers to check
  * \return true if equal else false
  */
-bool are_equal(double x, double y);
+inline bool are_equal(double x, double y)
+{
+    return fabs(x - y) < ACCURACY;
+}
 
 #endif // ALL_SERVICE_SQUARE_EQUATION_H__

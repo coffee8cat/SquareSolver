@@ -12,9 +12,9 @@
 
 solver_outcome solver(struct coeffs sq_coeffs, double * x1, double * x2)
 {
-    //my_assert (isfinite (sq_coeffs.a));
-    assert (isfinite (sq_coeffs.b));
-    assert (isfinite (sq_coeffs.c));
+    my_assert (isfinite (sq_coeffs.a));
+    my_assert (isfinite (sq_coeffs.b));
+    my_assert (isfinite (sq_coeffs.c));
 
     if(are_equal(sq_coeffs.a, 0.0))
     {
@@ -30,9 +30,9 @@ solver_outcome solver(struct coeffs sq_coeffs, double * x1, double * x2)
 solver_outcome square_equation(struct coeffs sq_coeffs, double * x1, double * x2)
 {
 
-    assert (isfinite (sq_coeffs.a));
-    assert (isfinite (sq_coeffs.b));
-    assert (isfinite (sq_coeffs.c));
+    my_assert (isfinite (sq_coeffs.a));
+    my_assert (isfinite (sq_coeffs.b));
+    my_assert (isfinite (sq_coeffs.c));
 
     const double d = sq_coeffs.b * sq_coeffs.b - 4 * sq_coeffs.a * sq_coeffs.c;
 

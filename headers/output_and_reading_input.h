@@ -33,21 +33,6 @@ bool file_input(struct coeffs sq_coeffs[MAX_FILE_INPUTS], char file_name[], int 
 bool read_file_name_and_open(FILE ** fp, char file_name[]);
 
 /**
- * \brief read file name from cmd
- * \param file name - for reading name of file
- * \return true if file name read succesfully else false
- */
-bool manual_read_file_name(char file_name[]);
-
-/**
- * \brief open a file with perror in case of fail
- * \param file name - name of file to open
- * \param fp - pointer to pointer to file
- * \return true if opened succesfully else false
- */
-bool open_file(char file_name[], FILE **fp);
-
-/**
  * \brief input coefficients for square equation from cmd
  * \param coeff_p - pointer to structure with coefficients for square equation
  */

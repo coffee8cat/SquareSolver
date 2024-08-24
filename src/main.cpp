@@ -1,6 +1,7 @@
 #define TX_COMPILED
 #include <TXLib.h>
 
+#include "my_macros.h"
 #include "data.h"
 #include "menu.h"
 #include "flags.h"

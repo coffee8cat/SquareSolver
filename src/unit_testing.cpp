@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include <assert.h>
 #include <math.h>
 
 #include "data.h"
+#include "my_macros.h"
 #include "unit_testing.h"
 #include "square_solver.h"
 #include "tests.h"
@@ -18,11 +18,11 @@ void start_unit_testing()
 
         if (test_result == SUCCEED)
         {
-            printf(ANSI_COLOR_GREEN "Unit test %d: SUCCESS\n" ANSI_COLOR_RESET, n_test+1);
+            print_green("Unit test %d: SUCCESS\n", n_test+1);
         }
         else
         {
-            printf(ANSI_COLOR_RED "Unit test %d failed\n" ANSI_COLOR_RESET, n_test+1);
+            print_red("Unit test %d failed\n", n_test+1);
         }
     }
 }
@@ -30,28 +30,32 @@ void start_unit_testing()
 void dump_unit_test_results(int n_test, struct unit_test failed_test_params,
                             double x1, double x2, solver_outcome test_n_roots)
 {
-    assert(isfinite(x1));
-    assert(isfinite(x2));
+    my_assert(isfinite(x1));
+    my_assert(isfinite(x2));
 
-    printf(ANSI_COLOR_RED
-            "--------------------------------------------------\n"
-            "RUN_TEST ERROR: test %d failed\n"
-            "Input: a = %15f, b = %30f, c = %45f\n \n"
-            "Expected Output: x1 = %15f; x2 = %30f; n_roots = %45d;\n"
-            "Solver Output:   x1 = %15f; x2 = %30f; n_roots = %45d;\n"
-           "--------------------------------------------------\n"
-           ANSI_COLOR_RESET,
-           n_test,
-           failed_test_params.coeffs_t.a,   failed_test_params.coeffs_t.b,   failed_test_params.coeffs_t.c,
-           failed_test_params.x1,           failed_test_params.x2,           failed_test_params.n_roots,
-           x1,                              x2,                              test_n_roots);
+    print_red(  "--------------------------------------------------\n"
+                "RUN_TEST ERROR: test %d failed\n"
+                "Input:           a = %f\n"
+                "                 b = %f\n"
+                "                 c = %f\n \n"
+                "Expected Output: x1 = %f\n"
+                "                 x2 = %f\n"
+                "                 n_roots = %d\n\n"
+                "Solver Output:   x1 = %f\n"
+                "                 x2 = %f\n"
+                "                 n_roots = %d\n\n"
+                "--------------------------------------------------\n",
+                n_test,
+                failed_test_params.coeffs_t.a,   failed_test_params.coeffs_t.b,   failed_test_params.coeffs_t.c,
+                failed_test_params.x1,           failed_test_params.x2,           failed_test_params.n_roots,
+                x1,                              x2,                              test_n_roots);
 }
 
 unit_test_res run_test(int n_test, struct unit_test run_test_params,
                     double x1, double x2, solver_outcome test_n_roots)
 {
-    assert(isfinite(x1));
-    assert(isfinite(x2));
+    my_assert(isfinite(x1));
+    my_assert(isfinite(x2));
 
     test_n_roots = solver(run_test_params.coeffs_t, &x1, &x2);
 
