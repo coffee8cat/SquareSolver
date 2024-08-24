@@ -35,9 +35,17 @@ build/sqsolver.exe
 
 Each flag will be executed only once with priority: -h > -u > -f, the flags order doesn't matter
 
-[NAME LINK](https://github.com/nickdiego/compiledb)
+**Example of unit testing results:**
 
-PICTURE <----------------------------------------------------
+![picture](pictures//unit_t_example.png)
+
+## Creating documentation with doxygen
+for creating documentation use command line:
+```shell
+doxygen doxygen_config
+```
+About doxygen:
+[DOXYGEN DOCUMENTATION](https://nnstreamer.github.io/doxygen-documentation.html)
 
 | Syntax      | Description |
 | ----------- | ----------- |
