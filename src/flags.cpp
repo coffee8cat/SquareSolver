@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <getopt.h>
 #include <math.h>
 
 #include "data.h"
@@ -31,7 +33,16 @@ void check_flags(struct flags_init * flags_values, const int argc, char * const 
 
     int opt = 0;
     const char optstring[] = "huf:";
-    while ((opt = getopt(argc, argv, optstring)) != -1)
+
+    option longoptions[] = {
+        {"help", 0, 0, 'h'},
+        {"unit_testing", 0, 0, 'u'},
+        {"file_input", 1, 0, 'f'}
+    };
+
+    int optldx = 0;
+
+    while ((opt = getopt_long(argc, argv, optstring, longoptions, &optldx)) != -1)
     {
         switch (opt)
         {
@@ -58,6 +69,8 @@ void check_flags(struct flags_init * flags_values, const int argc, char * const 
 
             default:
                 printf("option read error\n");
+
+                exit(EXIT_FAILURE);
                 break;
         }
     }

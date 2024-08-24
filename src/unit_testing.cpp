@@ -45,7 +45,7 @@ void dump_unit_test_results(int n_test, struct unit_test failed_test_params,
                 "                 x2 = %f\n"
                 "                 n_roots = %d\n\n"
                 "--------------------------------------------------\n",
-                n_test,
+                n_test+1,
                 failed_test_params.coeffs_t.a,   failed_test_params.coeffs_t.b,   failed_test_params.coeffs_t.c,
                 failed_test_params.x1,           failed_test_params.x2,           failed_test_params.n_roots,
                 x1,                              x2,                              test_n_roots);

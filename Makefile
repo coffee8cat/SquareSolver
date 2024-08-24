@@ -34,6 +34,10 @@ clean_exe:
 clean_obj:
 	rm $(OBJ_DIR)/*.o
 
+clean:
+	rm $(BUILD_DIR)/*.exe
+	rm $(OBJ_DIR)/*.o
+
 create_obj:
 	$(CC) $(SOURCES) -c -I$(HEADERS_DIR) $(CFLAGS)
 	mv *.o $(OBJ_DIR)

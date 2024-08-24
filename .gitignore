@@ -19,3 +19,5 @@ html/data_8h_source.html
 /html
 *.html
 *.html
+*.html
+*.o

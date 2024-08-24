@@ -65,7 +65,7 @@ void print_choose_input()
 
 void help()
 {
-    printf("Use flags below after a.exe:\n"
+    printf("Use flags below for your purposes:\n"
            " -u start solver unit testing\n"
            " -h ask for help about programm\n"
            " -f [file name] reading coeffs from FILE\n\n");
