@@ -46,22 +46,3 @@ doxygen doxygen_config
 ```
 About doxygen:
 [DOXYGEN DOCUMENTATION](https://nnstreamer.github.io/doxygen-documentation.html)
-
-| Syntax      | Description |
-| ----------- | ----------- |
-| Header      | Title       |
-| Paragraph   | Text        |
-
-```shell
-make
-```
-
-```cpp
-int main(void);
-```
-
-$$
-\int^{\infty}_0 x^2 dx = \dots
-$$
-
-
