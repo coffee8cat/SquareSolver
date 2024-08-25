@@ -4,7 +4,7 @@ Project for solving square equations using different features
 
 ## Installation
 ```shell
--pip install
+git clone https://github.com/coffee8cat/SquareSolver
 ```
 
 ## Using
