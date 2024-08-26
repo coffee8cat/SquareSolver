@@ -32,4 +32,4 @@ void check_flags(struct flags_init * flags_values, const int argc, char * const 
  */
 void execute_file_input_mode(char name_of_file[]);
 
-#endif //SQUARE_SOLVER_FLAGS_H__
+#endif // SQUARE_SOLVER_FLAGS_H__

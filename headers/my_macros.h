@@ -32,4 +32,4 @@ inline void my_assert_f(int expr, const char expression[])
     }
 }
 
-#endif //
+#endif // MY_SQSOLVER_MACROS_H__

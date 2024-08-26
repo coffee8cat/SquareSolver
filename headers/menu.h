@@ -23,6 +23,12 @@
  */
 bool is_standart_mode(const int argc);
 
+/**
+ * \brief choosing programm mode after incorrect file input
+ * \param x1, x2 - pointers to roots
+ * \param n_roots - number of roots
+ * \details allows to choose between standart mode, file input and unit testing
+ */
 bool menu(double * x1, double * x2, solver_outcome n_roots);
 
 void print_choose_input();
@@ -41,4 +47,4 @@ void welcome();
  */
 void std_mode_about();
 
-#endif //MENU_CHOOSING_MODE_H__
+#endif // MENU_CHOOSING_MODE_H__

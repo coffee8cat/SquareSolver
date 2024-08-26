@@ -53,4 +53,4 @@ void dump_unit_test_results(int n_test, struct unit_test test_params,
 unit_test_res run_test(int n_test, struct unit_test test_params,
                             double x1, double x2, solver_outcome test_n_roots);
 
-#endif //UNIT_TESTING_H__
+#endif // UNIT_TESTING_H__

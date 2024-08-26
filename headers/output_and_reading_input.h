@@ -46,4 +46,4 @@ void std_input(struct coeffs * coeffs_p);
  */
 void output_solutions(double x1, double x2, solver_outcome n_roots);
 
-#endif //OUTPUT_AND_READING_INPUT_H__
+#endif // OUTPUT_AND_READING_INPUT_H__

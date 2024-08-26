@@ -19,4 +19,4 @@ unit_test test_params[n_tests] = {
 };
 
 
-#endif //TESTS_FOR_UNIT_TESTING_H__
+#endif // TESTS_FOR_UNIT_TESTING_H__
