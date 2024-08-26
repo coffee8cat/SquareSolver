@@ -7,7 +7,7 @@
 #include "output_and_reading_input.h"
 #include "square_solver.h"
 
-bool file_input(struct coeffs coeff_p[MAX_FILE_INPUTS], char file_name[], int * n_read)
+bool file_input(struct coeffs coeff_p[MAX_FILE_INPUTS], char file_name[], int * const n_read)
 {
     my_assert(coeff_p != NULL);
     my_assert(file_name != NULL);
@@ -79,7 +79,6 @@ bool read_file_name_and_open(FILE ** fp, char file_name[])
             return false;
         }
     }
-
     return true;
 }
 
@@ -97,14 +96,13 @@ void std_input(struct coeffs * coeff_p)
     }
 }
 
-void output_solutions(double x1, double x2, solver_outcome nRoots)
+void output_solutions(const double x1, const double x2, const solver_outcome nRoots)
 {
     my_assert (isfinite (x1));
     my_assert (isfinite (x2));
 
     switch(nRoots)
     {
-
         case NO_ROOTS:
             printf("No solutions\n\n");
             break;

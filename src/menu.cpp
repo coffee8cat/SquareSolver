@@ -11,12 +11,11 @@ bool is_standart_mode(const int argc)
     return argc == 1;
 }
 
-bool menu(double * x1, double * x2, solver_outcome n_roots)
+bool menu()
 {
-    my_assert(x1 != NULL);
-    my_assert(x2 != NULL);
-
     coeffs sq_coeffs = {0, 0, 0};
+    double x1 = 0, x2 = 0;
+    solver_outcome n_roots = NO_ROOTS;
 
     char input = 'a';
     print_choose_input();
@@ -39,8 +38,8 @@ bool menu(double * x1, double * x2, solver_outcome n_roots)
 
             case 'c':
                 std_input(&sq_coeffs);
-                n_roots = solver(sq_coeffs, x1, x2);
-                output_solutions(*x1, *x2, n_roots);
+                n_roots = solver(sq_coeffs, &x1, &x2);
+                output_solutions(x1, x2, n_roots);
 
                 return true;
 
@@ -50,6 +49,7 @@ bool menu(double * x1, double * x2, solver_outcome n_roots)
 
             default:
                 printf("Only f, c, q are read as answeres\n");
+                return false;
                 break;
         }
     }

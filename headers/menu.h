@@ -11,25 +11,17 @@
 #include "square_solver.h"
 
 /**
- * \brief mode based on launch with flags or not
- * \param argc - number of elements read from cmd
- * \param argv - array with char arrays: elements read from cmd
- * \param coeff_p - pointer to structure with coefficients of square equation
- * \param x1 - pointer to the first root
- * \param x2 - pointer to the second root
- * \param n_roots - number of roots will be written here
- * \details in case without flags will run standart mode with cmd input and solving square equation
- * in case with flags will execute flag commands
+ * \brief checks if programm started with flags or not
+ * \param[in] argc - number of elements read from cmd
  */
 bool is_standart_mode(const int argc);
 
 /**
  * \brief choosing programm mode after incorrect file input
- * \param x1, x2 - pointers to roots
- * \param n_roots - number of roots
- * \details allows to choose between standart mode, file input and unit testing
+ * \details allows to choose between standart mode and file input
+ * \return true if input mode chosen and false if quit chosen
  */
-bool menu(double * x1, double * x2, solver_outcome n_roots);
+bool menu();
 
 /**
  * \brief print menu options

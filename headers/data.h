@@ -13,13 +13,11 @@
 #define ANSI_COLOR_GREEN   "\x1b[32m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
-#define print_red(...)  printf(ANSI_COLOR_RED);\
-                        printf(__VA_ARGS__); \
-                        printf(ANSI_COLOR_RESET)
+#define print_red(str, ...) printf(ANSI_COLOR_RED str ANSI_COLOR_RESET, ##__VA_ARGS__);
+#define print_green(str, ...)    printf(ANSI_COLOR_GREEN str ANSI_COLOR_RESET, ##__VA_ARGS__);
 
-#define print_green(...)    printf(ANSI_COLOR_GREEN);\
-                            printf(__VA_ARGS__); \
-                            printf(ANSI_COLOR_RESET)
+#define fprint_red(file,str,...) fprintf(file, ANSI_COLOR_RED str ANSI_COLOR_RESET, ##__VA_ARGS__);
+#define fprint_green(file,str,...) fprintf(file, ANSI_COLOR_GREEN str ANSI_COLOR_RESET, ##__VA_ARGS__);
 
 const double ACCURACY = 0.000001; ///< accuracy for all calculations in programm
 
@@ -63,7 +61,7 @@ inline void clean_input_buff()
  * \param x, y - double numbers to check
  * \return true if equal else false
  */
-inline bool are_equal(double x, double y)
+inline bool are_equal(const double x, const double y)
 {
     return fabs(x - y) < ACCURACY;
 }

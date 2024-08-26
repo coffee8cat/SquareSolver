@@ -9,7 +9,7 @@
 
 void start_unit_testing()
 {
-    for (int n_test = 0; n_test < n_tests; n_test++)
+    for (size_t n_test = 0; n_test < n_tests; n_test++)
     {
         double x1 = 0, x2 = 0;
         solver_outcome test_n_roots = NO_ROOTS;
@@ -22,14 +22,14 @@ void start_unit_testing()
         }
         else
         {
-            print_red("Unit test %d failed\n", n_test+1);
+            fprint_red(stderr, "Unit test %d failed\n", n_test+1);
         }
     }
     printf("\n\n");
 }
 
-void dump_unit_test_results(int n_test, struct unit_test failed_test_params,
-                            double x1, double x2, solver_outcome test_n_roots)
+void dump_unit_test_results(const size_t n_test, const struct unit_test failed_test_params,
+                            const double x1, const double x2, const solver_outcome test_n_roots)
 {
     my_assert(isfinite(x1));
     my_assert(isfinite(x2));
@@ -47,13 +47,13 @@ void dump_unit_test_results(int n_test, struct unit_test failed_test_params,
                 "                 n_roots = %d\n\n"
                 "--------------------------------------------------\n",
                 n_test+1,
-                failed_test_params.coeffs_t.a,   failed_test_params.coeffs_t.b,   failed_test_params.coeffs_t.c,
-                failed_test_params.x1,           failed_test_params.x2,           failed_test_params.n_roots,
-                x1,                              x2,                              test_n_roots);
+                failed_test_params.coeffs_t.a, failed_test_params.coeffs_t.b, failed_test_params.coeffs_t.c,
+                failed_test_params.x1,         failed_test_params.x2,         failed_test_params.n_roots,
+                x1,                            x2,                            test_n_roots);
 }
 
-unit_test_res run_test(int n_test, struct unit_test run_test_params,
-                    double x1, double x2, solver_outcome test_n_roots)
+unit_test_res run_test(const size_t n_test, const struct unit_test run_test_params,
+                       double x1, double x2, solver_outcome test_n_roots)
 {
     my_assert(isfinite(x1));
     my_assert(isfinite(x2));

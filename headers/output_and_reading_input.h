@@ -19,31 +19,31 @@ enum read_type_name
 
 /**
  * \brief input coefficients for square solver from file
- * \param coeff_p - pointer to structure with coefficients for square equation
- * \param read_type - was file name written with flags or not
- * \param file name - file to read from
+ * \param[in] read_type - was file name written with flags or not
+ * \param[in] file name - file to read from
+ * \param[out] coeff_p - pointer to structure with coefficients for square equation
  */
-bool file_input(struct coeffs sq_coeffs[MAX_FILE_INPUTS], char file_name[], int * n_read);
+bool file_input(struct coeffs sq_coeffs[MAX_FILE_INPUTS], char file_name[], int * const n_read);
 
 /**
  * \brief user-friendly read file name and open file with error handling
- * \param fp - pointer to file
- * \param file_name - variable for name of file
+ * \param[in] fp - pointer to file
+ * \param[in] file_name - variable for name of file
   */
 bool read_file_name_and_open(FILE ** fp, char file_name[]);
 
 /**
  * \brief input coefficients for square equation from cmd
- * \param coeff_p - pointer to structure with coefficients for square equation
+ * \param[out] coeff_p - pointer to structure with coefficients for square equation
  */
 void std_input(struct coeffs * coeffs_p);
 
 /**
  * \brief prints solutions for square equation
- * \param x1 - first root
- * \param x2 - second root
- * \param n_roots - number of roots
+ * \param[in] x1 - first root
+ * \param[in] x2 - second root
+ * \param[in] n_roots - number of roots
  */
-void output_solutions(double x1, double x2, solver_outcome n_roots);
+void output_solutions(const double x1, const double x2, const solver_outcome n_roots);
 
 #endif // OUTPUT_AND_READING_INPUT_H__

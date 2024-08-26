@@ -26,7 +26,7 @@ void standart_mode()
     output_solutions(x1, x2, n_roots);
 }
 
-void check_flags(struct flags_init * flags_values, const int argc, char * const argv[])
+bool check_flags(struct flags_init * flags_values, const int argc, char * const argv[])
 {
     my_assert(flags_values != NULL);
     my_assert(argv != NULL);
@@ -40,9 +40,9 @@ void check_flags(struct flags_init * flags_values, const int argc, char * const 
         {"file_input", 1, 0, 'f'}
     };
 
-    int optldx = 0;
+    int optidx = 0;
 
-    while ((opt = getopt_long(argc, argv, optstring, longoptions, &optldx)) != -1)
+    while ((opt = getopt_long(argc, argv, optstring, longoptions, &optidx)) != -1)
     {
         switch (opt)
         {
@@ -68,12 +68,12 @@ void check_flags(struct flags_init * flags_values, const int argc, char * const 
                 break;
 
             default:
-                printf("option read error\n");
+                fprintf(stderr, "option read error\n");
 
-                exit(EXIT_FAILURE);
-                break;
+                return false;
         }
     }
+    return true;
 }
 
 void execute_file_input_mode(char name_of_file[])
@@ -82,14 +82,14 @@ void execute_file_input_mode(char name_of_file[])
 
     coeffs sq_coeffs[MAX_FILE_INPUTS];
 
-    double x1 = 0, x2 = 0;
-    solver_outcome n_roots = NO_ROOTS;
-
     int n_read = 0;
 
     bool reading_file = file_input(sq_coeffs, name_of_file, &n_read);
     if (reading_file)
     {
+        double x1 = 0, x2 = 0;
+        solver_outcome n_roots = NO_ROOTS;
+
         for (int i=0; i < n_read; i++)
         {
             printf("equation number %d\n"
@@ -103,6 +103,6 @@ void execute_file_input_mode(char name_of_file[])
     else
     {
         printf("call menu\n");
-        menu(&x1, &x2, n_roots);
+        menu();
     }
 }

@@ -10,7 +10,7 @@
 #include "data.h"
 #include "my_macros.h"
 
-solver_outcome solver(struct coeffs sq_coeffs, double * x1, double * x2)
+solver_outcome solver(const struct coeffs sq_coeffs, double * const x1, double * const x2)
 {
     my_assert (isfinite (sq_coeffs.a));
     my_assert (isfinite (sq_coeffs.b));
@@ -24,12 +24,10 @@ solver_outcome solver(struct coeffs sq_coeffs, double * x1, double * x2)
     {
         return square_equation(sq_coeffs, x1, x2);
     }
-
 }
 
-solver_outcome square_equation(struct coeffs sq_coeffs, double * x1, double * x2)
+solver_outcome square_equation(const struct coeffs sq_coeffs, double * const x1, double * const x2)
 {
-
     my_assert (isfinite (sq_coeffs.a));
     my_assert (isfinite (sq_coeffs.b));
     my_assert (isfinite (sq_coeffs.c));
@@ -41,7 +39,6 @@ solver_outcome square_equation(struct coeffs sq_coeffs, double * x1, double * x2
         * x1 = -sq_coeffs.b / (2 * sq_coeffs.a);
         return ONE_ROOT;
     }
-
     else
     {
         if(d > 0)
@@ -57,12 +54,10 @@ solver_outcome square_equation(struct coeffs sq_coeffs, double * x1, double * x2
     }
 }
 
-solver_outcome linear_equation(struct coeffs sq_coeffs, double * x)
+solver_outcome linear_equation(const struct coeffs sq_coeffs, double * const x)
 {
-
     if(are_equal(sq_coeffs.b, 0.0))
     {
-
         if(are_equal(sq_coeffs.c, 0.0))
         {
             return INF_ROOTS;

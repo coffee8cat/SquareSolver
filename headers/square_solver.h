@@ -10,36 +10,36 @@
 
 /**
  * \brief choosing solver for square equation
- * \param sq_coeffs - coefficients for square equation
- * \param x1 - pointer to the first root
- * \param x2 - pointer to the second root
+ * \param[in] sq_coeffs - coefficients for square equation
+ * \param[out] x1 - pointer to the first root
+ * \param[out] x2 - pointer to the second root
  * \return square equation has : NO_ROOTS
  *                               ONE_ROOT
  *                               TWO_ROOTS
  *                               INF_NUM_OF_ROOTS
  */
-solver_outcome solver(struct coeffs square_coeffs, double * const x1, double * const x2);
+solver_outcome solver(const struct coeffs square_coeffs, double * const x1, double * const x2);
 
 /**
  * \brief solve square equation
- * \param sq_coeffs - coefficients for square equation
- * \param x1 - pointer to the first root
- * \param x2 - pointer to the second root
+ * \param[in] sq_coeffs - coefficients for square equation
+ * \param[out] x1 - pointer to the first root
+ * \param[out] x2 - pointer to the second root
  * \return square equation has : NO_ROOTS
  *                               ONE_ROOT
  *                               TWO_ROOTS
  *                               INF_NUM_OF_ROOTS
  */
-solver_outcome square_equation(struct coeffs square_coeffs, double * const x1, double * const x2);
+solver_outcome square_equation(const struct coeffs square_coeffs, double * const x1, double * const x2);
 
 /**
  * \brief solves linear equation
- * \param sq_coeffs - coefficients for square equation (coeff a = 0)
- * \param x - pointer to the first root
+ * \param[in] sq_coeffs - coefficients for square equation (coeff a = 0)
+ * \param[out] x - pointer to the first root
  * \return square equation has : NO_ROOTS
  *                               ONE_ROOT
  *                               INF_NUM_OF_ROOTS
  */
-solver_outcome linear_equation(struct coeffs square_coeffs, double * const x);
+solver_outcome linear_equation(const struct coeffs square_coeffs, double * const x);
 
 #endif // SQUARE_SOLVER_H__

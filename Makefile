@@ -2,7 +2,7 @@ CC = g++
 
 HEADERS_DIR = headers
 
-CFLAGS =  -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-equal \
+CFLAGS = -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-equal \
          -Winline -Wunreachable-code -Wmissing-declarations -Wmissing-include-dirs \
 		 -Wswitch-enum -Wswitch-default -Weffc++ -Wmain -Wextra -Wall -g -pipe -fexceptions \
 		 -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wempty-body -Wformat-security -Wformat=2 \
@@ -25,6 +25,9 @@ all: $(SOURCES) $(BUILD_DIR)
 %.o: %.cpp
 	$(CC) $(CFLAGS) -I$(HEADERS_DIR) $< -c -o $(OBJ_DIR)/$@
 
+create_build:
+	mkdir $(BUILD_DIR)
+
 create_txlib.o:
 	$(CC) $(CFLAGS) -I$(HEADERS_DIR) TXLib/TX_Lib.cpp -c -o $(OBJ_DIR)/TX_Lib.o
 
@@ -35,8 +38,8 @@ clean_obj:
 	rm $(OBJ_DIR)/*.o
 
 clean:
-	rm $(BUILD_DIR)/*.exe
-	rm $(OBJ_DIR)/*.o
+	rm $(BUILD_DIR)
+	rm $(OBJ_DIR)
 
 create_obj:
 	$(CC) $(SOURCES) -c -I$(HEADERS_DIR) $(CFLAGS)
@@ -44,7 +47,7 @@ create_obj:
 run:
 	.\$(BUILD_DIR)/$(EXECUTABLE)
 
-linking:
+linkage:
 	$(CC) $(OBJECTS) -o $(BUILD_DIR)/$(EXECUTABLE)
 
 create:

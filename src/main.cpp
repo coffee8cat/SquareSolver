@@ -12,7 +12,10 @@ int main(const int argc, char * const argv[])
 
     welcome();
 
-    check_flags(&flags_values, argc, argv);
+    if(!check_flags(&flags_values, argc, argv))
+    {
+        exit(EXIT_FAILURE);
+    }
 
     if (is_standart_mode(argc))
     {
@@ -33,4 +36,6 @@ int main(const int argc, char * const argv[])
             execute_file_input_mode(flags_values.name_of_file);
         }
     }
+
+    return EXIT_SUCCESS;
 }

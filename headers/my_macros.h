@@ -14,19 +14,25 @@
 #define my_isnan(x) ((x) != (x))
 #define my_isinf(x) (my_isnan(x-x))
 
-#define my_assert(expr) my_assert_f(expr, #expr, __FILE__, __LINE__)
+#ifndef N_DEBUG
+#define my_assert(expr) my_assert_f(expr, #expr, __FILE__, __LINE__, __func__)
+
+#else
+#define my_assert(expr); ;
+#endif
 
 /**
  * \brief my version of assert
- * \param expr - expression to check
- * \param expression - text representation of original expression
+ * \param[in] expr - expression to check
+ * \param[in] expression - text representation of original expression
  */
-inline void my_assert_f(int expr, const char expression[], const char file_name[], int line)
+inline void my_assert_f(const int expr, const char expression[], const char file_name[], const int line,
+                        const char func_name[])
 {
     if (expr == 0)
     {
-        fprintf(stderr, ANSI_COLOR_RED "    !!! ASSERTION FAILED !!!\n In file %s in line %d: %s\n"
-                 ANSI_COLOR_RESET, file_name, line, expression);
+        fprintf(stderr, ANSI_COLOR_RED "    !!! ASSERTION FAILED !!!\n In file %s %s in line %d: %s\n"
+                 ANSI_COLOR_RESET, file_name, func_name, line, expression);
 
         exit(EXIT_FAILURE);
     }
