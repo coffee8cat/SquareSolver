@@ -9,7 +9,7 @@ git clone https://github.com/coffee8cat/SquareSolver
 
 ## Using
 
-For separated compilation and faster setup of TXLib:
+For separated compilation and faster setup of [TXLib](https://github.com/ded32/TXLib):
 ```shell
 make TXLib/TXLib.o
 ```
