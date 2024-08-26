@@ -22,9 +22,16 @@ bool file_input(struct coeffs coeff_p[MAX_FILE_INPUTS], char file_name[], int * 
     if (reading_file)
     {
         int i = 0;
+        int scan_res = 0;
 
-        while (fscanf(fp, "%lg %lg %lg", &coeff_p[i].a, &coeff_p[i].b, &coeff_p[i].c) != -1)
+        while ((scan_res = fscanf(fp, "%lg %lg %lg", &coeff_p[i].a, &coeff_p[i].b, &coeff_p[i].c)) != -1)
         {
+            if (scan_res != 3)
+            {
+                fprintf(stderr, "FILE READ ERROR in line %d\n"
+                                "FILE READ STOPPED on line %d\n\n", i+1, i+1);
+                break;
+            }
             i++;
         }
 
@@ -51,7 +58,7 @@ bool read_file_name_and_open(FILE ** fp, char file_name[])
     while (true)
     {
         *fp = fopen(file_name, "r");
-        printf("opening file [%s]\n", file_name);
+        printf("opening file [%s]\n\n", file_name);
 
         if ( *fp )
         {

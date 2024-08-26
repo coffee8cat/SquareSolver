@@ -31,7 +31,11 @@ bool is_standart_mode(const int argc);
  */
 bool menu(double * x1, double * x2, solver_outcome n_roots);
 
+/**
+ * \brief print menu options
+ */
 void print_choose_input();
+
 /**
  * \brief print info about flags
  */

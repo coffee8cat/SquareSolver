@@ -94,7 +94,7 @@ void execute_file_input_mode(char name_of_file[])
         {
             printf("equation number %d\n"
                    "a = %f; b = %f, c = %f\n",
-                   i, sq_coeffs[i].a, sq_coeffs[i].b, sq_coeffs[i].c);
+                   i+1, sq_coeffs[i].a, sq_coeffs[i].b, sq_coeffs[i].c);
             n_roots = solver(sq_coeffs[i], &x1, &x2);
             output_solutions(x1, x2, n_roots);
         }
