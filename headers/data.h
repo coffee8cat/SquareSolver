@@ -35,9 +35,9 @@ struct flags_init
 /// @brief coefficients for square equation ax^2 + bx + c = 0
 struct coeffs
 {
-    double a; ///< coefficient before x^2
-    double b; ///< coefficient before x
-    double c; ///< free coefficient
+    double a; ///< quadratic coefficient
+    double b; ///< linear coefficient
+    double c; ///< free term
 };
 
 /// @brief number of roots of square equation

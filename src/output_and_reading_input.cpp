@@ -101,6 +101,7 @@ void output_solutions(double x1, double x2, solver_outcome nRoots)
 {
     my_assert (isfinite (x1));
     my_assert (isfinite (x2));
+
     switch(nRoots)
     {
 
