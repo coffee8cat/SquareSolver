@@ -47,6 +47,11 @@ create_obj:
 run:
 	.\$(BUILD_DIR)/$(EXECUTABLE)
 
+comp_run:
+	make create_obj
+	make linkage
+	make run
+
 linkage:
 	$(CC) $(OBJECTS) -o $(BUILD_DIR)/$(EXECUTABLE)
 

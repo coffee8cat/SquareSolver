@@ -31,7 +31,7 @@ inline void my_assert_f(const int expr, const char expression[], const char file
 {
     if (expr == 0)
     {
-        fprintf(stderr, ANSI_COLOR_RED "    !!! ASSERTION FAILED !!!\n In file %s %s in line %d: %s\n"
+        fprintf(stderr, ANSI_COLOR_RED "    !!! ASSERTION FAILED !!!\n In file %s function %s in line %d: %s\n"
                  ANSI_COLOR_RESET, file_name, func_name, line, expression);
 
         exit(EXIT_FAILURE);

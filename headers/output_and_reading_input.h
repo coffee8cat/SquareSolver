@@ -22,6 +22,7 @@ enum read_type_name
  * \param[in] read_type - was file name written with flags or not
  * \param[in] file name - file to read from
  * \param[out] coeff_p - pointer to structure with coefficients for square equation
+ * \return false if quitting file input else true
  */
 bool file_input(struct coeffs sq_coeffs[MAX_FILE_INPUTS], char file_name[], int * const n_read);
 
@@ -29,6 +30,7 @@ bool file_input(struct coeffs sq_coeffs[MAX_FILE_INPUTS], char file_name[], int 
  * \brief user-friendly read file name and open file with error handling
  * \param[in] fp - pointer to file
  * \param[in] file_name - variable for name of file
+ * \return false if quitting file input else true
   */
 bool read_file_name_and_open(FILE ** fp, char file_name[]);
 

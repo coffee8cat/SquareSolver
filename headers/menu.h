@@ -14,7 +14,7 @@
  * \brief checks if programm started with flags or not
  * \param[in] argc - number of elements read from cmd
  */
-bool is_standart_mode(const int argc);
+bool is_standart_mode(int argc);
 
 /**
  * \brief choosing programm mode after incorrect file input
@@ -37,7 +37,10 @@ void help();
  * \brief print welcoming message
  */
 void welcome();
-
+/**
+ * \brief print poltorashka, our dorm cat
+ */
+void print_poltorashka();
 /**
  * \brief print mode name and about -h flag for help
  */

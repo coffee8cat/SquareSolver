@@ -6,7 +6,7 @@
 #include "flags.h"
 #include "output_and_reading_input.h"
 
-bool is_standart_mode(const int argc)
+bool is_standart_mode(int argc)
 {
     return argc == 1;
 }
@@ -15,9 +15,10 @@ bool menu()
 {
     coeffs sq_coeffs = {0, 0, 0};
     double x1 = 0, x2 = 0;
+
     solver_outcome n_roots = NO_ROOTS;
 
-    char input = 'a';
+    char input = ' ';
     print_choose_input();
 
     while (true)
@@ -49,7 +50,6 @@ bool menu()
 
             default:
                 printf("Only f, c, q are read as answeres\n");
-                return false;
                 break;
         }
     }
@@ -76,6 +76,38 @@ void welcome()
     printf("# Square Solver\n"
            "# Ded Course 2024\n"
            "-------------------------------------\n\n");
+}
+
+void print_poltorashka()
+{
+    printf(" \
+      \\`-._           __\n\
+        \\  `-..____,.'  `.\n\
+         :`.         /    \\`.\n\
+         :  )       :      : \\\n\
+          ;'        '   ;  |  :\n\
+          )..      .. .:.`.;  :\n\
+         /::...  .:::...   ` ;\n\
+         ; _ '    __        /:\\\n\
+         `:o>   /\\o_>      ;:. `.\n\
+        `-`.__ ;   __..--- /:.   \\\n\
+        === \\_/   ;=====_.':.     ;\n\
+         ,/'`--'...`--....        ;\n\
+              ;                    ;\n\
+            .'                      ;\n\
+          .'                        ;\n\
+        .'     ..     ,      .       ;\n\
+       :       ::..  /      ;::.     |\n\
+      /      `.;::.  |       ;:..    ;\n\
+     :         |:.   :       ;:.    ;\n\
+     :         ::     ;:..   |.    ;\n\
+      :       :;      :::....|     |\n\
+      /\\     ,/ \\      ;:::::;     ;\n\
+    .:. \\:..|    :     ; '.--|     ;\n\
+   ::.  :''  `-.,,;     ;'   ;     ;\n\
+.-'. _.'\\      / `;      \\,__:      \\\n\
+`---'    `----'   ;      /    \\,.,,,/\n\
+                   `----`\n");
 }
 
 void std_mode_about()

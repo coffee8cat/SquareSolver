@@ -6,16 +6,17 @@
 #include "menu.h"
 #include "flags.h"
 
-int main(const int argc, char * const argv[])
+int main(int argc, char *const argv[])
 {
     flags_init flags_values = {false, false, false, ""};
-
-    welcome();
 
     if(!check_flags(&flags_values, argc, argv))
     {
         exit(EXIT_FAILURE);
     }
+
+    welcome();
+    print_poltorashka();
 
     if (is_standart_mode(argc))
     {

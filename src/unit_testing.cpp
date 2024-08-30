@@ -9,12 +9,14 @@
 
 void start_unit_testing()
 {
+    size_t n_tests = SIZE_OF_ARR(TEST_PARAMS);
+
     for (size_t n_test = 0; n_test < n_tests; n_test++)
     {
         double x1 = 0, x2 = 0;
         solver_outcome test_n_roots = NO_ROOTS;
 
-        unit_test_res test_result = run_test(n_test, test_params[n_test], x1, x2, test_n_roots);
+        unit_test_res test_result = run_test(n_test, TEST_PARAMS[n_test], x1, x2, test_n_roots);
 
         if (test_result == SUCCEED)
         {

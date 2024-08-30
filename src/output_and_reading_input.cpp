@@ -98,8 +98,8 @@ void std_input(struct coeffs * coeff_p)
 
 void output_solutions(const double x1, const double x2, const solver_outcome nRoots)
 {
-    my_assert (isfinite (x1));
-    my_assert (isfinite (x2));
+    my_assert(isfinite(x1));
+    my_assert(isfinite(x2));
 
     switch(nRoots)
     {
@@ -108,13 +108,13 @@ void output_solutions(const double x1, const double x2, const solver_outcome nRo
             break;
 
         case ONE_ROOT:
-            printf("Single solution: x = %lf\n\n", x1);
+            printf("Single solution: x = %lg\n\n", x1);
             break;
 
         case TWO_ROOTS:
             printf("Two solutions:\n");
-            printf(" x1 = %lf\n", x1);
-            printf(" x2 = %lf\n\n", x2);
+            printf(" x1 = %lg\n", x1);
+            printf(" x2 = %lg\n\n", x2);
             break;
 
         case INF_ROOTS:

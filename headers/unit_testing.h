@@ -32,7 +32,7 @@ void start_unit_testing();
 /**
  * \brief dump results of failed test
  * \param[in] n_test - number of failed test
- * \param[in] test_params - structure with coefficients of square equation and expected roots
+ * \param[in] TEST_PARAMS - structure with coefficients of square equation and expected roots
  * \param[in] x1 - first root got from test
  * \param[in] x2 - second root got from test
  * \param[in] test_n_roots - number of roots got from test
@@ -43,14 +43,14 @@ void dump_unit_test_results(const size_t n_test, const struct unit_test failed_t
 /**
  * \brief run single test from unit testing
  * \param[in] n_test - test number
- * \param[in] test_params - structure with coefficients for square equation,
+ * \param[in] TEST_PARAMS - structure with coefficients for square equation,
  *                      expected roots and their number
  * \param[out] x1 - variable for the first root
  * \param[out] x2 - variable for the second root
  * \param[out] n_roots - variable for the number of roots
  * \return FAILED if test failed, else SUCCCED
  */
-unit_test_res run_test(const size_t n_test, const struct unit_test test_params,
+unit_test_res run_test(const size_t n_test, const struct unit_test TEST_PARAMS,
                             double x1, double x2, solver_outcome test_n_roots);
 
 #endif // UNIT_TESTING_H__
